@@ -3,7 +3,7 @@ import React from 'react'
 
 function Step1() {
   return (
-    <Box sx={{minHeight: "300px", p: 2}}>
+    <Box sx={{minHeight: "300px", py: 2, px: 1}}>
         <Typography variant="subtitle" color="bgGrey">Hi, Tell us about you</Typography>
         <Box sx={{textAlign: "start", margin: "20px 0"}}>
             <Typography variant="label" >First Name</Typography>

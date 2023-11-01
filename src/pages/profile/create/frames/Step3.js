@@ -3,7 +3,7 @@ import React from 'react'
 
 function Step3() {
   return (
-    <Box sx={{minHeight: "300px", p: 2}}>
+    <Box sx={{minHeight: "300px", py: 2, px: 1}}>
         <Typography variant="subtitle" color="bgGrey">Upload your profile picture</Typography>
         <Box sx={{textAlign: "start", margin: "20px 0"}}>
             <Typography variant="label" >Title</Typography>
