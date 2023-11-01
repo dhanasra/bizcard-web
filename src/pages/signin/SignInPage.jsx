@@ -5,8 +5,11 @@ import theme from '../../utils/theme'
 import { FcGoogle } from "react-icons/fc";
 import { BiLogoFacebookCircle } from "react-icons/bi";
 import useStyles from './style';
+import { useNavigate } from 'react-router-dom';
 
 function SignInPage() {
+
+    const navigate = useNavigate();
 
     const classes = useStyles();
 
@@ -24,7 +27,7 @@ function SignInPage() {
                 <Typography variant="label" >Email Address</Typography>
                 <TextField size="small" fullWidth/>
             </Box>
-            <Button  variant="contained" disableElevation fullWidth>Submit</Button>
+            <Button  variant="contained" onClick={()=>navigate('/auth/callback')} disableElevation fullWidth>Submit</Button>
             <Divider spacing={1} sx={{fontSize: "0.8em", my: 3}}>Or</Divider>
             <Button sx={{marginBottom: "20px"}} startIcon={<FcGoogle/>} variant="outlined" disableElevation fullWidth>Signin With Google</Button>
             <Button sx={{marginBottom: "8px"}} variant="outlined" startIcon={<BiLogoFacebookCircle color="#4267B2"/>} disableElevation fullWidth>Signin With Facebook</Button>
