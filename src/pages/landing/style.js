@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme)=>({
         justifyContent: "center",
         flexDirection: "column", 
         width: "50%", 
-        p: 4
+        p: 3
     },
     contentRight: {
         display: "flex", 
