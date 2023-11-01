@@ -32,7 +32,7 @@ jobs:
         run: firebase use --token "$FIREBASE_TOKEN" --add "$FIREBASE_PROJECT_ID"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          FIREBASE_PROJECT_ID: formly-ai
+          FIREBASE_PROJECT_ID: bizcard-web
 
       - name: Deploy to Firebase Hosting
         run: firebase deploy --only hosting
