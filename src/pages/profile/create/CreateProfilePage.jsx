@@ -8,15 +8,21 @@ import Step1 from './frames/Step1';
 import Step2 from './frames/Step2';
 import Step3 from './frames/Step3';
 import Step4 from './frames/Step4';
+import { useNavigate } from 'react-router-dom';
 
 function CreateProfilePage() {
 
   const classes = useStyles();
 
+  const navigate = useNavigate();
+
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
+    if(activeStep===3){
+      navigate("/app/cards")
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -41,7 +47,7 @@ function CreateProfilePage() {
               activeStep={activeStep}
               sx={{ maxWidth: 400, flexGrow: 1 }}
               nextButton={
-                <Button size="small" onClick={handleNext} disabled={activeStep === 3}>
+                <Button size="small" onClick={handleNext} disabled={activeStep === 4}>
                   Next
                   {theme.direction === 'rtl' ? (
                     <KeyboardArrowLeft />
