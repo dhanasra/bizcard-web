@@ -1,7 +1,7 @@
 import { Divider, Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import logoWhite from '../assets/logo/logo-white.png';
-import { PiNoteLight, PiChartBarLight, PiGearLight, PiUserLight } from "react-icons/pi";
+import { PiNoteLight, PiGearLight, PiEnvelopeLight, PiUsersLight, PiImageSquareLight } from "react-icons/pi";
 import { Link } from 'react-router-dom';
 import { FiX } from 'react-icons/fi';
 import theme from '../utils/theme';
@@ -14,22 +14,22 @@ const items = [
         path: "/app/cards"
     },
     {
-        icon: <PiChartBarLight fontSize={'24px'}/>,
+        icon: <PiUsersLight fontSize={'24px'}/>,
         label: "Contacts",
         path: "/contacts"
     },
     {
-        icon: <PiGearLight fontSize={'24px'}/>,
-        label: "Backgrounds",
+        icon: <PiImageSquareLight fontSize={'24px'}/>,
+        label: "Theme",
         path: "/backgrounds"
     },
     {
-        icon: <PiUserLight fontSize={'24px'}/>,
-        label: "Email Signatures",
+        icon: <PiEnvelopeLight fontSize={'24px'}/>,
+        label: "Signatures",
         path: "/email-signatures"
     },
     {
-        icon: <PiUserLight fontSize={'24px'}/>,
+        icon: <PiGearLight fontSize={'24px'}/>,
         label: "Settings",
         path: "/settings"
     }
