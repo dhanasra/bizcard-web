@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme)=>({
         maxWidth: "1200px", 
         display: "flex"
     },
+    contentWrapperMax: {
+        flexDirection: "column",
+        textAlign: "center",
+        padding: "50px 0"
+    },
     contentLeft: {
         display: "flex", 
         alignItems: "start",
@@ -33,7 +38,8 @@ const useStyles = makeStyles((theme)=>({
         width: "50%", 
     },
     contentMax: {
-        width: "100%"
+        width: "100%",
+        alignItems: "center"
     }
 }))
 

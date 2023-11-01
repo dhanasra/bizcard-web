@@ -10,6 +10,7 @@ const theme = createTheme({
             fontSize: '3em',
             '@media (max-width:600px)': {
               fontSize: '1.5rem',
+              lineHeight: '1.4',
             },
             fontFamily: 'sans-serif',
             fontWeight: 600
@@ -17,8 +18,10 @@ const theme = createTheme({
         body: {
             fontSize: '1.2em',
             '@media (max-width:600px)': {
-              fontSize: '1.5rem',
+              fontSize: '1rem',
+              lineHeight: '1.4',
             },
+            lineHeight: '1.8',
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
