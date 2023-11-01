@@ -25,11 +25,18 @@ const theme = createTheme({
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
+        label: {
+            fontSize: '0.95em',
+            lineHeight: '2',
+            fontFamily: 'sans-serif',
+            fontWeight: 400
+        },
         h5: {
             fontWeight: 600,
         }
     },
     palette: {
+        bgGrey: createColor("#EEE7"),
         inverted: createColor("#3C4A78"),
         white: createColor("#fff"),
         primary: {
@@ -42,7 +49,7 @@ const theme = createTheme({
                 root: {
                     borderRadius: 4, 
                     textTransform: 'none',
-                    fontWeight: 600
+                    fontWeight: 500
                 },
             },
         },
