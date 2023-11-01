@@ -31,6 +31,13 @@ const theme = createTheme({
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
+        subtitle: {
+            fontSize: '1.2em',
+            lineHeight: '2',
+            color: "#222f",
+            fontFamily: 'sans-serif',
+            fontWeight: 600
+        },
         h5: {
             fontWeight: 600,
         }
