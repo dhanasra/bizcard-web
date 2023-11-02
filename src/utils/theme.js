@@ -31,12 +31,26 @@ const theme = createTheme({
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
+        labelLight: {
+            fontSize: '0.85em',
+            lineHeight: '2',
+            color: '#999',
+            fontFamily: 'sans-serif',
+            fontWeight: 400
+        },
         subtitle: {
             fontSize: '1.2em',
             lineHeight: '2',
             color: "#222f",
             fontFamily: 'sans-serif',
             fontWeight: 600
+        },
+        subtitleBold: {
+            fontSize: '1.1em',
+            lineHeight: '2',
+            color: "#222f",
+            fontFamily: 'sans-serif',
+            fontWeight: 550
         },
         h5: {
             fontWeight: 600,

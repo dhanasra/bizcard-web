@@ -7,10 +7,13 @@ import { PiMagnifyingGlassLight } from "react-icons/pi";
 import CardsEmpty from '../../../components/CardsEmpty'
 import CardItem from '../../../components/CardItem'
 import theme from '../../../utils/theme'
+import { useNavigate } from 'react-router-dom'
 
 function CardsListPage() {
 
     const classes = useStyles();
+
+    const navigate = useNavigate();
 
     const cards = [''];
 
@@ -42,7 +45,7 @@ function CardsListPage() {
                                         ),
                                     }}  
                                 />}
-                                <Button variant="contained" sx={{marginLeft: "16px"}}>Add Card</Button>
+                                <Button onClick={()=>navigate("/app/cards/create")} variant="contained" sx={{marginLeft: "16px"}}>Add Card</Button>
                             </div>
 
                         </Box>

@@ -31,7 +31,7 @@ const items = [
     {
         icon: <PiGearLight fontSize={'24px'}/>,
         label: "Settings",
-        path: "/settings"
+        path: "/app/settings"
     }
 ];
 
