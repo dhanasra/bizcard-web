@@ -16,7 +16,7 @@ function DisplayForm() {
         </Box>
 
         <Grid container spacing={4}>
-            <Grid item xs={6} md={3}>
+            <Grid item sm={6} xs={12} md={3} >
                 <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                     <img src={image} width={120} alt={''} />
 
@@ -27,7 +27,7 @@ function DisplayForm() {
                 </Box>
             </Grid>
 
-            <Grid item xs={6} md={3}>
+            <Grid item sm={6} xs={12} md={3}>
                 <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                     <img src={userAvatar} width={120} alt={''} />
 
@@ -38,7 +38,7 @@ function DisplayForm() {
                 </Box>
             </Grid>
 
-            <Grid item xs={6} md={3}>
+            <Grid item sm={6} xs={12} md={3}>
                 <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                     <img src={banner} width={120} alt={''} />
 

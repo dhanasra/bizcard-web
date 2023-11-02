@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme)=>{
             margin: "16px 16px 0 16px", 
             boxShadow: "0px 2px 30px #ccc6"
         },
+        contentMax: {
+            width: "100%"
+        },
         gapless: {
             margin: "0px"
         },

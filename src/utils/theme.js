@@ -31,6 +31,11 @@ const theme = createTheme({
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
+        content: {
+            fontSize: '0.85em',
+            fontFamily: 'sans-serif',
+            fontWeight: 400
+        },
         labelLight: {
             fontSize: '0.85em',
             lineHeight: '2',
