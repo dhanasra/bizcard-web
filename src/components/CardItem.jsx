@@ -2,6 +2,7 @@ import { Box, Chip, Typography } from '@mui/material'
 import { makeStyles } from "@mui/styles";
 import React from 'react'
 import logo from '../assets/logo/logo.png'
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     image: {
@@ -16,9 +17,13 @@ function CardItem() {
 
     const classes = useStyles();
 
+    const navigate = useNavigate();
+
   return (
     <Box 
+        onClick={()=>navigate('/app/cards/view')}
         sx={{
+            cursor: "pointer",
             background: "#fff", 
             height: "200px", 
             width: "100%", 

@@ -6,6 +6,7 @@ import AuthCallbackPage from "../pages/callback/AuthCallbackPage";
 import CardsListPage from "../pages/cards/list/CardsListPage";
 import SettingsPage from "../pages/settings/SettingsPage";
 import CreateCardPage from "../pages/cards/create/CreateCardPage";
+import CardViewPage from "../pages/cards/view/CardViewPage";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     {
         path: '/app/cards/create',
         element: <CreateCardPage/>
+    },
+    {
+        path: '/app/cards/view',
+        element: <CardViewPage/>
     },
     {
         path: '/app/settings',
