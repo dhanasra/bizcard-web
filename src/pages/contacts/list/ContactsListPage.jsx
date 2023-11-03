@@ -6,14 +6,11 @@ import useStyles from './style'
 import { PiMagnifyingGlassLight } from "react-icons/pi";
 import CardsEmpty from '../../../components/CardsEmpty'
 import theme from '../../../utils/theme'
-import { useNavigate } from 'react-router-dom'
 import ContactItem from '../../../components/ContactItem'
 
 function ContactsListPage() {
 
     const classes = useStyles();
-
-    const navigate = useNavigate();
 
     const cards = [''];
 

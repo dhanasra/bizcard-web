@@ -9,6 +9,8 @@ import CreateCardPage from "../pages/cards/create/CreateCardPage";
 import CardViewPage from "../pages/cards/view/CardViewPage";
 import ContactsListPage from "../pages/contacts/list/ContactsListPage";
 import ContactViewPage from "../pages/contacts/view/ContactViewPage";
+import VirtualBackgroundPage from "../pages/backgrounds/VirtualBackgroundPage";
+import EmailSignaturesPage from "../pages/signatures/EmailSignaturesPage";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
     {
         path: '/app/contacts/view',
         element: <ContactViewPage/>
+    },
+    {
+        path: '/app/backgrounds',
+        element: <VirtualBackgroundPage/>
+    },
+    {
+        path: '/app/email-signatures',
+        element: <EmailSignaturesPage/>
     },
     {
         path: '/app/settings',

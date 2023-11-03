@@ -18,12 +18,12 @@ const items = [
     {
         icon: <PiImageSquareLight fontSize={'24px'}/>,
         label: "Theme",
-        path: "/backgrounds"
+        path: "/app/backgrounds"
     },
     {
         icon: <PiEnvelopeLight fontSize={'24px'}/>,
         label: "Signatures",
-        path: "/email-signatures"
+        path: "/app/email-signatures"
     },
     {
         icon: <PiGearLight fontSize={'24px'}/>,
