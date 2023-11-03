@@ -13,7 +13,7 @@ const items = [
     {
         icon: <PiUsersLight fontSize={'24px'}/>,
         label: "Contacts",
-        path: "/contacts"
+        path: "/app/contacts"
     },
     {
         icon: <PiImageSquareLight fontSize={'24px'}/>,

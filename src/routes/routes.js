@@ -7,6 +7,8 @@ import CardsListPage from "../pages/cards/list/CardsListPage";
 import SettingsPage from "../pages/settings/SettingsPage";
 import CreateCardPage from "../pages/cards/create/CreateCardPage";
 import CardViewPage from "../pages/cards/view/CardViewPage";
+import ContactsListPage from "../pages/contacts/list/ContactsListPage";
+import ContactViewPage from "../pages/contacts/view/ContactViewPage";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
     {
         path: '/app/cards/view',
         element: <CardViewPage/>
+    },
+    {
+        path: '/app/contacts',
+        element: <ContactsListPage/>
+    },
+    {
+        path: '/app/contacts/view',
+        element: <ContactViewPage/>
     },
     {
         path: '/app/settings',
