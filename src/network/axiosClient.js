@@ -26,7 +26,14 @@ axiosClient.interceptors.request.use(
 
 axiosClient.interceptors.response.use(
     response=>{
-        return response.data['data'];
+        const data = response.data["data"];
+
+        if(data?.token){
+            Cookies.set('accessToken', data.token.accessToken);
+            Cookies.set('refreshToken', data.token.refreshToken);
+        }
+
+        return data;
     },
     error=>{
         const originalRequest = error.config;
@@ -43,9 +50,9 @@ axiosClient.interceptors.response.use(
                 .then(res=>{
                     if(res.status===200){
                         const data = res.data['data'];
-                        Cookies.set('accessToken', data?.accessToken); 
-                        Cookies.set('refreshToken', data?.refreshToken); 
-                        axiosClient.defaults.headers.common['Authorization'] = `Bearer ${data?.accessToken}`;
+                        Cookies.set('accessToken', data?.token.accessToken); 
+                        Cookies.set('refreshToken', data?.token.refreshToken); 
+                        axiosClient.defaults.headers.common['Authorization'] = `Bearer ${data?.token.accessToken}`;
                         return axios(originalRequest)
                     }
                 })
