@@ -12,6 +12,8 @@ import VirtualBackgroundPage from "../pages/backgrounds/VirtualBackgroundPage";
 import EmailSignaturesPage from "../pages/signatures/EmailSignaturesPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 import SetUpPage from "../pages/setup/SetUpPage";
+import { Provider } from "react-redux";
+import { SetupStore } from "../features/setup/setupStore";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +34,11 @@ const router = createBrowserRouter([
     },
     {
         path: '/setup',
-        element: <SetUpPage/>
+        element: (
+            <Provider store={SetupStore}> 
+                <SetUpPage/> 
+            </Provider>
+        )
     },
     {
         path: '/app/cards',

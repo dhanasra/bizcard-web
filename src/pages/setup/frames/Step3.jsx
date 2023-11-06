@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Box, Stack, Typography } from '@mui/material';
 import ImageCropper from '../../../components/ImageCropper';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFormData } from '../../../features/setup/setupSlice';
 
 function Step3() {
 
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.setup.formData);
+
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(formData?.picture);
 
   const handleOpen = () => {
     setOpen(true);
@@ -14,6 +19,11 @@ function Step3() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCroppedImage = (image) => {
+    dispatch(setFormData({picture: image}));
+    setCroppedImage(image);
   };
 
   const handleFileChange = (e) => {
@@ -61,7 +71,7 @@ function Step3() {
         <ImageCropper 
           open={open}
           image={image}
-          onCrop={setCroppedImage}
+          onCrop={handleCroppedImage}
           onClose={handleClose}
         />
       </Box>

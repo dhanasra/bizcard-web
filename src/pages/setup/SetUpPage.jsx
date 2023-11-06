@@ -1,5 +1,5 @@
 import { Box, MobileStepper, Typography, useTheme } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import useStyles from './style';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -9,6 +9,9 @@ import Step2 from './frames/Step2';
 import Step3 from './frames/Step3';
 import Step4 from './frames/Step4';
 import { useNavigate } from 'react-router-dom';
+import WindowLoader from '../../components/WindowLoader';
+import { useSelector } from 'react-redux';
+import { setupCard } from '../../network/service/setupService';
 
 function SetUpPage() {
 
@@ -16,12 +19,16 @@ function SetUpPage() {
 
   const navigate = useNavigate();
 
+  const formData = useSelector((state) => state.setup.formData);
+
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const [loading, setLoading] = useState(false);
 
   const handleNext = () => {
     if(activeStep===3){
-      navigate("/app/cards")
+      setupAccount();
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -30,8 +37,16 @@ function SetUpPage() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  async function setupAccount(){
+      setLoading(true);
+      await setupCard(formData);
+      setLoading(false);
+      navigate('/app/cards');
+  }
+
   return (
     <Box className={`${classes.window}`}>
+        {loading && <WindowLoader/>}
         <Box className={classes.outerBox}>
           <Typography variant="h6">Create Your Business Card</Typography>
           {
@@ -48,7 +63,7 @@ function SetUpPage() {
               sx={{ maxWidth: 400, flexGrow: 1 }}
               nextButton={
                 <Button size="small" onClick={handleNext} disabled={activeStep === 4}>
-                  Next
+                  {activeStep> 2 ? "Submit" : "Next"}
                   {theme.direction === 'rtl' ? (
                     <KeyboardArrowLeft />
                   ) : (
