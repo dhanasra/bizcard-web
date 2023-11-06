@@ -1,18 +1,17 @@
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
 
 function Step1() {
   return (
     <Box sx={{minHeight: "300px", py: 2, px: 1}}>
         <Typography variant="subtitle" color="bgGrey">Hi, Tell us about you</Typography>
-        <Box sx={{textAlign: "start", margin: "20px 0"}}>
-            <Typography variant="label" >First Name</Typography>
-            <TextField size="small" fullWidth/>
-        </Box>
-        <Box sx={{textAlign: "start", margin: "20px 0"}}>
-            <Typography variant="label" >Last Name</Typography>
-            <TextField size="small" fullWidth/>
-        </Box>
+        <Stack spacing={2} sx={{margin: "24px 0 32px 0"}}>
+            <Stack spacing={2} direction={"row"}>
+                <TextField label={"First Name"} fullWidth/>
+                <TextField label={"Last Name"} fullWidth/>
+            </Stack>
+            <TextField label={"Email Address"} fullWidth/>
+        </Stack>
     </Box>
   )
 }
