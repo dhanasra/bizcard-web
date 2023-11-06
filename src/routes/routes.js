@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import LandingPage from "../pages/landing/LandingPage";
 import SignInPage from "../pages/signin/SignInPage";
-import CreateProfilePage from "../pages/profile/create/CreateProfilePage";
 import AuthCallbackPage from "../pages/callback/AuthCallbackPage";
 import CardsListPage from "../pages/cards/list/CardsListPage";
 import SettingsPage from "../pages/settings/SettingsPage";
@@ -12,6 +11,7 @@ import ContactViewPage from "../pages/contacts/view/ContactViewPage";
 import VirtualBackgroundPage from "../pages/backgrounds/VirtualBackgroundPage";
 import EmailSignaturesPage from "../pages/signatures/EmailSignaturesPage";
 import SignUpPage from "../pages/signup/SignUpPage";
+import SetUpPage from "../pages/setup/SetUpPage";
 
 const router = createBrowserRouter([
     {
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
         element: <AuthCallbackPage/>
     },
     {
-        path: '/profile/create',
-        element: <CreateProfilePage/>
+        path: '/setup',
+        element: <SetUpPage/>
     },
     {
         path: '/app/cards',

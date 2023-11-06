@@ -31,7 +31,7 @@ function SignUpPage() {
         setLoading(true);
         await signUpWithEmail({email: email, password: password});
         setLoading(false);
-        navigate('/app/cards');
+        navigate('/setup');
     }
 
 

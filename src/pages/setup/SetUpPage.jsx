@@ -10,7 +10,7 @@ import Step3 from './frames/Step3';
 import Step4 from './frames/Step4';
 import { useNavigate } from 'react-router-dom';
 
-function CreateProfilePage() {
+function SetUpPage() {
 
   const classes = useStyles();
 
@@ -72,4 +72,4 @@ function CreateProfilePage() {
   )
 }
 
-export default CreateProfilePage
+export default SetUpPage
