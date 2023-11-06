@@ -18,6 +18,6 @@ export const AppSlice = createSlice({
     }
 })
 
-export const {setFormData} = AppSlice.actions;
+export const {initializeApp} = AppSlice.actions;
 
 export default AppSlice.reducer;
