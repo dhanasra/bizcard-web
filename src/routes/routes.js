@@ -11,6 +11,7 @@ import ContactsListPage from "../pages/contacts/list/ContactsListPage";
 import ContactViewPage from "../pages/contacts/view/ContactViewPage";
 import VirtualBackgroundPage from "../pages/backgrounds/VirtualBackgroundPage";
 import EmailSignaturesPage from "../pages/signatures/EmailSignaturesPage";
+import SignUpPage from "../pages/signup/SignUpPage";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: '/signin',
         element: <SignInPage/>
+    },
+    {
+        path: '/signup',
+        element: <SignUpPage/>
     },
     {
         path: '/auth/callback',
