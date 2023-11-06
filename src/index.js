@@ -2,13 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { ThemeProvider } from '@mui/material';
-import { RouterProvider } from 'react-router-dom';
-import router from './routes/routes';
+import { BrowserRouter } from 'react-router-dom';
 import theme from './utils/theme';
+import AppRouter from './routes/routes';
+import { Provider } from 'react-redux';
+import { AppStore } from './features/app/appStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider theme={theme}>
-    <RouterProvider router={router}/>
+    <Provider store={AppStore}>
+      <BrowserRouter>
+          <AppRouter />
+      </BrowserRouter>
+    </Provider>
   </ThemeProvider>
 );

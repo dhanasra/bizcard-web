@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import LandingPage from "../pages/landing/LandingPage";
 import SignInPage from "../pages/signin/SignInPage";
 import AuthCallbackPage from "../pages/callback/AuthCallbackPage";
@@ -12,10 +12,41 @@ import VirtualBackgroundPage from "../pages/backgrounds/VirtualBackgroundPage";
 import EmailSignaturesPage from "../pages/signatures/EmailSignaturesPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 import SetUpPage from "../pages/setup/SetUpPage";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { SetupStore } from "../features/setup/setupStore";
+import { useEffect } from "react";
+import { checkCookies } from "../utils/utils";
+import { AppStore } from "../features/app/appStore";
 
-const router = createBrowserRouter([
+const CheckAuthAndStorage = ({ children }) => {
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.app.user);
+    const currentLocation = useLocation();
+  
+    useEffect(() => {
+      const isLoggedIn = checkCookies();
+
+      const hasLocalStorage = user!=null;
+
+      const unAuthRoutes = ['/', '/signin', '/signup', '/auth/callback', '/setup'];
+      
+      if (!unAuthRoutes.includes(currentLocation.pathname)) {
+        if (!isLoggedIn || !hasLocalStorage) {
+            navigate('/signin'); 
+        }
+      }else{
+        if (isLoggedIn && hasLocalStorage) {
+            navigate('/app/cards'); 
+        }
+      }
+
+
+    }, [user, navigate, currentLocation]);
+  
+    return <>{children}</>;
+};
+
+const router = [
     {
         path: '/',
         element: <LandingPage/>
@@ -72,6 +103,22 @@ const router = createBrowserRouter([
         path: '/app/settings',
         element: <SettingsPage/>
     }
-])
+]
 
-export default router;
+const AppRouter = () => {
+    return <Provider store={AppStore}>
+        <CheckAuthAndStorage >
+            <Routes>
+                {
+                    router.map((route)=>{
+                        return (
+                            <Route key={route.path} path={route.path} element={route.element} />
+                        );
+                    })
+                }
+            </Routes>
+        </CheckAuthAndStorage>
+    </Provider>;
+};
+
+export default AppRouter;
