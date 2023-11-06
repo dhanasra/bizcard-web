@@ -7,9 +7,6 @@ const useStyles = makeStyles((theme)=>({
         textAlign: "center", 
         alignItems: "center",
         justifyContent: "center", 
-        background: theme.palette.primary.main, 
-    },
-    windowMax: {
         background: theme.palette.bgGrey.main,
     },
     outerBox: {
