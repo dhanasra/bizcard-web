@@ -17,6 +17,7 @@ import { SetupStore } from "../features/setup/setupStore";
 import { useEffect } from "react";
 import { checkCookies } from "../utils/utils";
 import { AppStore } from "../features/app/appStore";
+import LoaderPage from "../pages/loader/LoaderPage";
 
 const CheckAuthAndStorage = ({ children }) => {
     const navigate = useNavigate();
@@ -28,18 +29,21 @@ const CheckAuthAndStorage = ({ children }) => {
 
       const hasLocalStorage = user!=null;
 
-      const unAuthRoutes = ['/', '/signin', '/signup', '/auth/callback', '/setup'];
+      const isUnAuthRoute = ['/', '/signin', '/signup', '/auth/callback'].includes(currentLocation.pathname);
       
-      if (!unAuthRoutes.includes(currentLocation.pathname)) {
-        if (!isLoggedIn || !hasLocalStorage) {
-            navigate('/signin'); 
+      if (isUnAuthRoute && isLoggedIn) {
+        if(hasLocalStorage){
+            navigate('/app/cards');
+        }else{
+            navigate('/loading');
         }
       }else{
-        if (isLoggedIn && hasLocalStorage) {
-            navigate('/app/cards'); 
+        if(!isLoggedIn){
+            navigate('/signin');
+        }else if(!hasLocalStorage){
+            navigate('/loading'); 
         }
       }
-
 
     }, [user, navigate, currentLocation]);
   
@@ -70,6 +74,10 @@ const router = [
                 <SetUpPage/> 
             </Provider>
         )
+    },
+    {
+        path: '/loading',
+        element: <LoaderPage />
     },
     {
         path: '/app/cards',
