@@ -8,6 +8,7 @@ import CardsEmpty from '../../../components/CardsEmpty'
 import CardItem from '../../../components/CardItem'
 import theme from '../../../utils/theme'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function CardsListPage() {
 
@@ -15,7 +16,7 @@ function CardsListPage() {
 
     const navigate = useNavigate();
 
-    const cards = [''];
+    const cards = useSelector((state)=>state.app.cards);
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
