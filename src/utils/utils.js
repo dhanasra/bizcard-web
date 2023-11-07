@@ -26,3 +26,7 @@ export function clearCache(){
     Cookies.remove('refreshToken');
     localStorage.clear();
 }
+
+export function generateRandomId() {
+    return '_' + Math.random().toString(36).substr(2, 9);
+}

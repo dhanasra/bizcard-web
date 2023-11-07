@@ -10,6 +10,8 @@ import GeneralForm from './forms/GeneralForm';
 import CardForm from './forms/CardForm';
 import BusinessForm from './forms/BusinessForm';
 import PhonePreview from '../../../components/PhonePreview';
+import { CardBuilderStore } from '../../../features/cardBuilder/cardBuilderStore';
+import { Provider } from 'react-redux';
 
 function a11yProps(index) {
     return {
@@ -34,6 +36,7 @@ function CreateCardPage() {
   return (
     <Box className={classes.window}>
         <CommonAppBar />
+        <Provider store={CardBuilderStore}>
         <Box className={classes.outerBox}>
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
@@ -65,6 +68,7 @@ function CreateCardPage() {
                 </Box>}
             </Box>
         </Box>
+        </Provider>
     </Box>
   )
 }

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     user: null,
+    config: null,
     contacts: [],
     cards: []
 }
@@ -14,6 +15,7 @@ export const AppSlice = createSlice({
             state.user = action.payload?.user;
             state.contacts = action.payload?.contacts;
             state.cards = action.payload?.cards;
+            window.config = action.payload?.config;
         }
     }
 })

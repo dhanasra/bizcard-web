@@ -1,7 +1,17 @@
 import { Box, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCardData } from '../../../../features/cardBuilder/cardBuilderSlice';
 
 function GeneralForm() {
+
+    const dispatch = useDispatch();
+    const cardData = useSelector((state) => state.cardBuilder.cardData);
+  
+    const handleChange=(field, event)=>{
+      dispatch(updateCardData({path: field, value: event.target.value}));
+    }  
+
   return (
     <div>
         <Box sx={{marginBottom: "12px"}}>
@@ -9,22 +19,22 @@ function GeneralForm() {
         </Box>
         <Grid container columnSpacing={4} rowSpacing={3.5}>
             <Grid item xs={6} md={6}>
-                <TextField label={"First Name"} fullWidth/>
+                <TextField label={"First Name"} value={cardData?.name?.firstName??""} onChange={(event)=>handleChange("name.firstName", event)} fullWidth/>
             </Grid>
             <Grid item xs={6} md={6}>
-                <TextField label={"Last Name"} fullWidth/>
+                <TextField label={"Last Name"} value={cardData?.name?.lastName??""} onChange={(event)=>handleChange("name.lastName", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"Middle Name"} fullWidth/>
+                <TextField label={"Middle Name"} value={cardData?.name?.middleName??""} onChange={(event)=>handleChange("name.middleName", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"Prefix"} fullWidth/>
+                <TextField label={"Prefix"} value={cardData?.name?.prefix??""} onChange={(event)=>handleChange("name.prefix", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"Phone Number"} fullWidth/>
+                <TextField label={"Phone Number"} value={cardData?.phoneNumber??""} onChange={(event)=>handleChange("phoneNumber", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"Email Address"} fullWidth/>
+                <TextField label={"Email Address"} value={cardData?.email??""} onChange={(event)=>handleChange("email", event)} fullWidth/>
             </Grid>
         </Grid>
 
@@ -33,22 +43,22 @@ function GeneralForm() {
         </Box>
         <Grid container columnSpacing={4} rowSpacing={3.5}>
             <Grid item xs={12} >
-                <TextField label={"Address Line 1"} fullWidth/>
+                <TextField label={"Address Line 1"} value={cardData?.address?.addressLine1??""} onChange={(event)=>handleChange("address.addressLine1", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} >
-                <TextField label={"Address Line 2"} fullWidth/>
+                <TextField label={"Address Line 2"} value={cardData?.address?.addressLine2??""} onChange={(event)=>handleChange("address.addressLine2", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"city"} fullWidth/>
+                <TextField label={"city"} value={cardData?.address?.city??""} onChange={(event)=>handleChange("address.city", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"State"} fullWidth/>
+                <TextField label={"State"} value={cardData?.address?.state??""} onChange={(event)=>handleChange("address.state", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"Country"} fullWidth/>
+                <TextField label={"Country"} value={cardData?.address?.country??""} onChange={(event)=>handleChange("address.country", event)} fullWidth/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextField label={"Pincode"} fullWidth/>
+                <TextField label={"Pincode"} value={cardData?.address?.pinCode??""} onChange={(event)=>handleChange("address.pinCode", event)} fullWidth/>
             </Grid>
         </Grid>
     </div>

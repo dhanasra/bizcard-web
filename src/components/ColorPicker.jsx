@@ -12,7 +12,7 @@ function ColorPicker() {
     <Box sx={{display: "flex", width: isSmallScreen? window.innerWidth-48: "100%", overflow: "auto", p: 1}}>
         {
             colors.map((color)=>{
-                return <Box sx={{background: color, borderRadius: "4px", marginRight: "16px"}}>
+                return <Box key={color} sx={{background: color, borderRadius: "4px", marginRight: "16px"}}>
                     <Box sx={{background: "#fff", borderRadius: "4px", padding: "2px", margin: "1px"}}>
                         <Box sx={{ background: color, borderRadius: "4px", width: 32, height: 32 }}></Box>
                     </Box>
