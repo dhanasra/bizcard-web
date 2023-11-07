@@ -29,18 +29,16 @@ const CheckAuthAndStorage = ({ children }) => {
 
       const hasLocalStorage = user!=null;
 
-      const isUnAuthRoute = ['/', '/signin', '/signup', '/auth/callback'].includes(currentLocation.pathname);
-
-      console.log(isLoggedIn);
-      console.log(hasLocalStorage);
-      console.log(currentLocation.pathname);
+      const isUnAuthRoute = ['/', '/signin', '/signup', '/auth/callback', '/setup'].includes(currentLocation.pathname);
 
       if(currentLocation.pathname!=='/loading'){
-        if (isUnAuthRoute && isLoggedIn) {
-            if(hasLocalStorage){
-                navigate('/app/cards');
-            }else{
-                navigate('/loading');
+        if (isUnAuthRoute) {
+            if(isLoggedIn){
+                if(hasLocalStorage){
+                    navigate('/app/cards');
+                }else{
+                    navigate('/loading');
+                }
             }
         }else{
             if(!isLoggedIn){
@@ -49,7 +47,7 @@ const CheckAuthAndStorage = ({ children }) => {
                 navigate('/loading'); 
             }
         }
-        }
+      }
 
     }, [user, navigate, currentLocation]);
   

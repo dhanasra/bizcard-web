@@ -29,7 +29,7 @@ function SignUpPage() {
 
     async function signup(){
         setLoading(true);
-        await signUpWithEmail({email: email, password: password});
+        await signUpWithEmail({email: email, password: password, firstName: firstName, lastName: lastName});
         setLoading(false);
         navigate('/setup');
     }

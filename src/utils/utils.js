@@ -20,3 +20,9 @@ export function checkLocalStorage(){
         return false; 
     }
 }
+
+export function clearCache(){
+    Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
+    localStorage.clear();
+}
