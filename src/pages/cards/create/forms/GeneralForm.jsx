@@ -2,6 +2,7 @@ import { Box, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardData } from '../../../../features/cardBuilder/cardBuilderSlice';
+import ImagePickerPlaceholder from '../../../../components/ImagePickerPlaceholder';
 
 function GeneralForm() {
 
@@ -10,7 +11,11 @@ function GeneralForm() {
   
     const handleChange=(field, event)=>{
       dispatch(updateCardData({path: field, value: event.target.value}));
-    }  
+    }
+    
+    const handleImageChange=(image)=>{
+      dispatch(updateCardData({path: "picture", value: image}));
+    }
 
   return (
     <div>
@@ -18,6 +23,14 @@ function GeneralForm() {
             <Typography variant="subtitleBold" >Profile</Typography>
         </Box>
         <Grid container columnSpacing={4} rowSpacing={3.5}>
+            <Grid item xs={12}>
+                <Box>
+                    <ImagePickerPlaceholder
+                        picture={cardData?.picture}
+                        onChange={handleImageChange}
+                    />
+                </Box>
+            </Grid>
             <Grid item xs={6} md={6}>
                 <TextField label={"First Name"} value={cardData?.name?.firstName??""} onChange={(event)=>handleChange("name.firstName", event)} fullWidth/>
             </Grid>

@@ -7,6 +7,7 @@ import IconTextRow from './IconTextRow';
 import Header from './Header';
 import HtmlViewer from './HtmlViewer';
 import { anyNotEmpty, getFieldIcon } from '../utils/utils';
+import Wave from '../assets/svgs/wave.svg';
 
 const useStyle = makeStyles({
     outerbox: {
@@ -35,7 +36,6 @@ const useStyle = makeStyles({
         width: "auto",
         display: "flex",
         flexDirection: "column",
-        background: "#fff", 
         borderRadius: "4px",
         boxShadow: "0px 2px 30px #ccc6"
     },
@@ -47,28 +47,40 @@ function CardPreview() {
 
     const cardData = useSelector((state) => state.cardBuilder.cardData);
 
+    const primaryColor = "#6DD3C7"
+    const background = "#fff"
+
   return (
     <Box className={classes.outerbox}>
         <Box className={classes.screen}>
-            <Box className={classes.content}>
-                <Box
-                    sx={{
-                        width: "100%",
-                        height: "50px",
-                        background: "#6DD3C7",
-                        borderRadius: "16px 16px 0 0"
+            <Box className={classes.content} sx={{background: primaryColor}}>
+                { cardData?.picture && <div
+                    style={{
+                        position: "relative",
+                        height: "280px"
                     }}
-                />
+                >
+                    <Box
+                        sx={{
+                            width: "100%",
+                            height: "250px",
+                            background: primaryColor,
+                            backgroundImage: `url(${cardData.picture})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            borderRadius: "4px 4px 0 0",
+                            position: "absolute", 
+                        }}
+                    />
 
-                <Box sx={{width: "auto", height: "70px"}}>
-                    <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style={{stroke: "none", fill:"#6DD3C7"}}></path>
-                    </svg>
-                </Box>
+                    <Box sx={{width: "100%",  marginBottom: "-4px", position: "absolute", bottom: 0}}>
+                        <img src={Wave} alt="Wave SVG" style={{background: "#00000000"}}/>
+                    </Box>
+                </div> }
                 
-                <Box px={2} py={3}>
+                <Box px={2} sx={{background: background, paddingBottom: "32px"}}>
                     
-                    <Box py={2}>
+                    <Box py={0}>
                         <Typography variant="titleBold">{cardData?.name?.prefix} {cardData?.name?.firstName} {cardData?.name?.middleName} {cardData?.name?.lastName}</Typography>
                         <Box>
                             <Typography variant="labelLight">{cardData?.company?.title}</Typography>

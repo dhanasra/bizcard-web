@@ -3,6 +3,7 @@ import React from 'react'
 import RichTextEditor from '../../../../components/RichTextEditor';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardData } from '../../../../features/cardBuilder/cardBuilderSlice';
+import ImagePickerPlaceholder from '../../../../components/ImagePickerPlaceholder';
 
 function BusinessForm() {
 
@@ -16,12 +17,39 @@ function BusinessForm() {
       dispatch(updateCardData({path: "company.companyDescription", value: htmlString}));
     };
 
+    const handleImageChange=(image)=>{
+        dispatch(updateCardData({path: "logo", value: image}));
+    }
+
+    const handleBannerChange=(image)=>{
+        dispatch(updateCardData({path: "banner", value: image}));
+    }
+
   return (
     <div style={{width: "100%"}}>
         <Box sx={{marginBottom: "12px"}}>
             <Typography variant="subtitleBold" >Profile</Typography>
         </Box>
         <Grid container columnSpacing={4} rowSpacing={3.5}>
+            <Grid item xs={12} sm={12} md={6}>
+                <Box sx={{display: "flex"}}>
+                    <ImagePickerPlaceholder
+                        text={"Upload Logo"}
+                        picture={cardData?.logo}
+                        onChange={handleImageChange}
+                    />
+                </Box>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+                <Box sx={{display: "flex", width: "100%"}}>
+                    <ImagePickerPlaceholder
+                        width={"auto"}
+                        text={"Upload Banner"}
+                        picture={cardData?.banner}
+                        onChange={handleBannerChange}
+                    />
+                </Box>
+            </Grid>
             <Grid item xs={6} >
                 <TextField label={"Title"} value={cardData?.company?.title??""} onChange={(event)=>handleChange("company.title", event)} fullWidth/>
             </Grid>

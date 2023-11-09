@@ -31,6 +31,12 @@ const theme = createTheme({
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
+        body3: {
+            fontSize: '0.85em',
+            fontFamily: 'sans-serif',
+            fontWeight: 400,
+            color: '#666',
+        },
         content: {
             fontSize: '0.85em',
             fontFamily: 'sans-serif',

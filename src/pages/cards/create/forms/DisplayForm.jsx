@@ -1,8 +1,5 @@
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
-import userAvatar from '../../../../assets/placeholder/user.png'
-import banner from '../../../../assets/placeholder/banner.png'
-import image from '../../../../assets/placeholder/image.png'
 import ColorPicker from '../../../../components/ColorPicker';
 import DesignPicker from '../../../../components/DesignPicker';
 import { Add } from '@mui/icons-material';
@@ -11,46 +8,8 @@ function DisplayForm() {
 
   return (
     <div>
+
         <Box sx={{marginBottom: "12px"}}>
-            <Typography variant="subtitleBold" >Display</Typography>
-        </Box>
-
-        <Grid container spacing={4}>
-            <Grid item sm={6} xs={12} md={3} >
-                <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                    <img src={image} width={120} alt={''} />
-
-                    <Button variant="contained" component="label" sx={{marginTop: "16px", width: "150px"}}>
-                        Upload Logo
-                        <input type="file" hidden />
-                    </Button>
-                </Box>
-            </Grid>
-
-            <Grid item sm={6} xs={12} md={3}>
-                <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                    <img src={userAvatar} width={120} alt={''} />
-
-                    <Button variant="contained" component="label" sx={{marginTop: "16px", width: "150px"}}>
-                        Upload Photo
-                        <input type="file" hidden />
-                    </Button>
-                </Box>
-            </Grid>
-
-            <Grid item sm={6} xs={12} md={3}>
-                <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                    <img src={banner} width={120} alt={''} />
-
-                    <Button variant="contained" component="label" sx={{marginTop: "16px", width: "150px"}}>
-                        Upload Banner
-                        <input type="file" hidden />
-                    </Button>
-                </Box>
-            </Grid>
-        </Grid>
-
-        <Box sx={{marginBottom: "12px", marginTop: "44px"}}>
             <Typography variant="subtitleBold" >Design</Typography>
         </Box>
 
@@ -65,16 +24,16 @@ function DisplayForm() {
                 
                 <Box
                     sx={{   
-                        width: "120px",
-                        height: "120px",
+                        cursor: "pointer",
+                        width: "140px",
+                        height: "140px",
+                        border: "2px dashed #E2E8F0",
                         borderRadius: "8px",
-                        border: "1px dashed #556080",
+                        background: "#F7FAFC",
+                        padding: "4px",
                         display: "flex",
-                        background: "#E7ECED",
-                        flexDirection: "column",
-                        justifyContent: "center",
                         alignItems: "center",
-                        textAlign: "center"
+                        justifyContent: "center"
                     }}
                 >
                     <Add/>

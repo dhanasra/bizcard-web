@@ -68,7 +68,7 @@ function ImageCropper(props) {
                 image={props.image}
                 crop={crop}
                 zoom={zoom}
-                cropSize={{width: 200, height: 200}}
+                cropSize={{width: props.width ?? 200, height: 200}}
                 aspect={4 / 3}
                 onCropChange={setCrop}
                 onZoomChange={setZoom}
