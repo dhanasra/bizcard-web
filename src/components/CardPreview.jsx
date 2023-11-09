@@ -113,6 +113,7 @@ function CardPreview() {
                     <Header
                         visible={cardData?.company?.companyName || cardData?.company?.department}
                         text={cardData?.company?.companyName}
+                        logo={cardData?.logo}
                         subtext={cardData?.company?.department}
                     />
 
