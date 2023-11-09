@@ -1,6 +1,5 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
-import ColorPicker from '../../../../components/ColorPicker';
 import DesignPicker from '../../../../components/DesignPicker';
 import { Add } from '@mui/icons-material';
 
@@ -25,8 +24,8 @@ function DisplayForm() {
                 <Box
                     sx={{   
                         cursor: "pointer",
-                        width: "140px",
-                        height: "140px",
+                        width: "132px",
+                        height: "132px",
                         border: "2px dashed #E2E8F0",
                         borderRadius: "8px",
                         background: "#F7FAFC",
@@ -41,12 +40,6 @@ function DisplayForm() {
                 </Box>
             </Grid>
         </Grid>
-
-        <Box sx={{marginBottom: "12px", marginTop: "44px"}}>
-            <Typography variant="subtitleBold" >Theme</Typography>
-        </Box>
-
-        <ColorPicker/>
 
     </div>
   )

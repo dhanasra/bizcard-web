@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 import IconTextRow from './IconTextRow';
 import Header from './Header';
 import HtmlViewer from './HtmlViewer';
-import { anyNotEmpty, getFieldIcon } from '../utils/utils';
-import Wave from '../assets/svgs/wave.svg';
+import { anyNotEmpty, designs, getDesign, getFieldIcon } from '../utils/utils';
 
 const useStyle = makeStyles({
     outerbox: {
@@ -50,6 +49,10 @@ function CardPreview() {
     const primaryColor = "#6DD3C7"
     const background = "#fff"
 
+    const cardDesign = cardData?.design??designs[0].name;
+
+    console.log(cardData?.design);
+
   return (
     <Box className={classes.outerbox}>
         <Box className={classes.screen}>
@@ -63,7 +66,7 @@ function CardPreview() {
                     <Box
                         sx={{
                             width: "100%",
-                            height: "250px",
+                            height: "100%",
                             background: primaryColor,
                             backgroundImage: `url(${cardData.picture})`,
                             backgroundSize: 'cover',
@@ -73,9 +76,9 @@ function CardPreview() {
                         }}
                     />
 
-                    <Box sx={{width: "100%",  marginBottom: "-4px", position: "absolute", bottom: 0}}>
-                        <img src={Wave} alt="Wave SVG" style={{background: "#00000000"}}/>
-                    </Box>
+                   {cardDesign!=="flat" && <Box sx={{width: "100%",  marginBottom: "-4px", position: "absolute", bottom: 0}}>
+                        <img src={getDesign(cardDesign).wave} alt="Wave SVG" style={{background: "#00000000"}}/>
+                    </Box> }
                 </div> }
                 
                 <Box px={2} sx={{background: background, paddingBottom: "32px"}}>

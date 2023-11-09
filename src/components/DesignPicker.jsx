@@ -1,137 +1,88 @@
 import { Avatar, Box, Grid } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
+import { HiCheckBadge } from "react-icons/hi2";
+import { useDispatch } from 'react-redux';
+import { updateCardData } from '../features/cardBuilder/cardBuilderSlice';
+import { designs } from '../utils/utils';
 
-function DesignPicker() {
+function DesignPicker({design}) {
+
+    const dispatch = useDispatch();
+
+
+    const [selected, setSelected] = useState(design ?? designs[0]);
+
+    const handleClick=(design)=>{
+        setSelected(design)
+        dispatch(updateCardData({path: "design", value: design.name}));
+    }
+
+
   return (
     <Grid container spacing={4}>
-        <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                <Box sx={{
-                    width: "140px",
-                    height: "140px",
-                    background: "#fff",
-                    boxShadow: "0px 2px 30px #ccc6",
-                    borderRadius: "16px"
-                }}>
-                    <Box
-                        sx={{
-                            width: "100%",
-                            height: "30%",
-                            background: "#556080",
-                            borderRadius: "16px 16px 0 0"
-                        }}
-                    />
-                    <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style={{stroke: "none", fill:"#556080"}}></path>
-                    </svg>
-
-                </Box>
-            </Box>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                    <Box sx={{
-                        width: "140px",
-                        height: "140px",
-                        background: "#fff",
-                        boxShadow: "0px 2px 30px #ccc6",
-                        borderRadius: "16px",
-                        position: "relative"
-                    }}>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: "30%",
-                                background: "#556080",
-                                borderRadius: "16px 16px 0 0"
+        {
+            designs.map((design)=>(
+                <Grid key={design.id} item xs={6} sm={6} md={3}>
+                    <Box onClick={()=>{handleClick(design)}} sx={{cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center"}}>
+                    
+                        <Box sx={{
+                            width: "150px",
+                            height: "150px",
+                            background: "#fff",
+                            position: "relative",
+                            boxShadow: "0px 2px 30px #ccc6",
+                            borderRadius: "8px"
+                        }}>
+                            { selected.name===design.name && <HiCheckBadge 
+                                fontSize={26}
+                                style={{
+                                    position: "absolute",
+                                    color: "#3C4A78",
+                                    zIndex: "1000",
+                                    bottom: 14,
+                                    right: 14
+                                }}
+                            /> }
+                        <div
+                            style={{
+                                position: "relative",
+                                height: "100px"
                             }}
-                        />
+                        >
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: "90px",
+                                    background: "#7FFFD4",
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    borderRadius: "8px",
+                                    position: "absolute", 
+                                }}
+                            />
 
-                        <Avatar sx={{
-                            background: "#E7ECED", 
-                            position: "absolute", 
-                            width: 46,
-                            height: 46,
-                            right: 16, 
-                            top: 30
-                        }}/>
+                            <Avatar sx={{
+                                zIndex: 100,
+                                background: "#7FFFD4", 
+                                position: "absolute", 
+                                width: 46,
+                                height: 46,
+                                right: 16,
+                                top: 40
+                            }}/>
 
-                        <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                            <path d="M0,180 C150,100 350,0 600,00 L500,00 L0,0 Z" style={{stroke: "none", fill:"#556080"}}></path>
-                        </svg>  
+                            
 
+                            { design.id!=="d-4" && <Box sx={{width: "100%",  marginBottom: "-4px", position: "absolute", bottom: 0}}>
+                                <img src={design.wave} alt="Wave SVG" style={{background: "#00000000"}}/>
+                            </Box>}
+                        </div>
+
+                        </Box>
                     </Box>
-                </Box>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                <Box sx={{
-                    width: "140px",
-                    height: "140px",
-                    background: "#fff",
-                    boxShadow: "0px 2px 30px #ccc6",
-                    borderRadius: "16px",
-                    position: "relative"
-                }}>
-                    <Avatar sx={{
-                            background: "#E7ECED", 
-                            position: "absolute", 
-                            width: 46,
-                            height: 46,
-                            top: "44%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                        }}/>
-                    <Box
-                        sx={{
-                            width: "100%",
-                            height: "24%",
-                            background: "#556080",
-                            borderRadius: "16px 16px 0 0"
-                        }}
-                    />
-                    <Box
-                        sx={{
-                            width: "100%",
-                            height: "20%",
-                            background: "#556080",
-                            borderRadius: "0 0 100px 100px"
-                        }}
-                    />
-                </Box>
-            </Box>
-        </Grid>  
-        <Grid item xs={12} sm={6} md={3}>
-            <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                <Box sx={{
-                    width: "140px",
-                    height: "140px",
-                    background: "#fff",
-                    boxShadow: "0px 2px 30px #ccc6",
-                    borderRadius: "16px",
-                    position: "relative"
-                }}>
-
-                        <Avatar sx={{
-                            background: "#E7ECED", 
-                            position: "absolute", 
-                            width: 46,
-                            height: 46,
-                            left: 16,
-                            top: 40
-                        }}/>
-                    <Box
-                        sx={{
-                            width: "100%",
-                            height: "40%",
-                            background: "#556080",
-                            borderRadius: "16px 16px 0 0"
-                        }}
-                    />
-
-                </Box>
-            </Box>
-        </Grid>                
+                </Grid>
+            ))
+        }          
     </Grid>
   )
 }

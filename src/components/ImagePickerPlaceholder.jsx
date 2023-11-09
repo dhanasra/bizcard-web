@@ -48,8 +48,8 @@ function ImagePickerPlaceholder({text, picture, width, onChange}) {
             <Box
                 sx={{
                     cursor: "pointer",
-                    width: width ?? "140px",
-                    height: "140px",
+                    width: width ?? "132px",
+                    height: "132px",
                     border: "2px dashed #E2E8F0",
                     borderRadius: "8px",
                     background: "#F7FAFC",
