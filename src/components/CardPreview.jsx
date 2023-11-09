@@ -63,12 +63,26 @@ function CardPreview() {
                         height: "280px"
                     }}
                 >
+
+                    {
+                        cardData?.picture && cardData?.banner && <Avatar
+                            src={cardData?.picture}
+                            sx={{
+                                width: 84, 
+                                height: 84,
+                                zIndex: 1000,
+                                position: "absolute", 
+                                bottom: "10%",
+                                right: "10%"
+                            }}
+                        />
+                    }
                     <Box
                         sx={{
                             width: "100%",
                             height: "100%",
                             background: primaryColor,
-                            backgroundImage: `url(${cardData.picture})`,
+                            backgroundImage: `url(${cardData.banner ?? cardData.picture})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             borderRadius: "4px 4px 0 0",

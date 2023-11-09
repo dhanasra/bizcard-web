@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, useMediaQuery } from '@mui/material'
+import { Box, Button, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import CommonAppBar from '../../../components/CommonAppBar'
 import Sider from '../../../components/Sider'
@@ -62,6 +62,10 @@ function CreateCardPage() {
                             value===3 ? <FieldsForm/> : <CardForm/>
                         }
                     </Box>
+                    <Stack direction={"row-reverse"} spacing={2} sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", display: "flex",p: 2}}>
+                        <Button variant="contained" sx={{width: "120px"}} disableElevation>Save</Button>
+                        <Button variant="outlined" sx={{width: "120px", marginRight: "16px"}}>Cancel</Button>
+                    </Stack>
                 </Box>
                 
                 {!isSmallScreen && <Box className={classes.previewBox}>

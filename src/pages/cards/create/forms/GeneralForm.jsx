@@ -17,6 +17,10 @@ function GeneralForm() {
       dispatch(updateCardData({path: "picture", value: image}));
     }
 
+    const removeImage=()=>{
+      dispatch(updateCardData({path: "picture", value: null}));
+    }
+
   return (
     <div>
         <Box sx={{marginBottom: "12px"}}>
@@ -28,6 +32,7 @@ function GeneralForm() {
                     <ImagePickerPlaceholder
                         picture={cardData?.picture}
                         onChange={handleImageChange}
+                        onRemove={removeImage}
                     />
                 </Box>
             </Grid>

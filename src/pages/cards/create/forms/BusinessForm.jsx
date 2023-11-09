@@ -18,11 +18,19 @@ function BusinessForm() {
     };
 
     const handleImageChange=(image)=>{
-        dispatch(updateCardData({path: "logo", value: image}));
+      dispatch(updateCardData({path: "logo", value: image}));
     }
 
     const handleBannerChange=(image)=>{
-        dispatch(updateCardData({path: "banner", value: image}));
+      dispatch(updateCardData({path: "banner", value: image}));
+    }
+    
+    const removeLogo=()=>{
+      dispatch(updateCardData({path: "logo", value: null}));
+    }
+
+    const removeBanner=()=>{
+      dispatch(updateCardData({path: "banner", value: null}));
     }
 
   return (
@@ -37,6 +45,7 @@ function BusinessForm() {
                         text={"Upload Logo"}
                         picture={cardData?.logo}
                         onChange={handleImageChange}
+                        onRemove={removeLogo}
                     />
                 </Box>
             </Grid>
@@ -47,6 +56,7 @@ function BusinessForm() {
                         text={"Upload Banner"}
                         picture={cardData?.banner}
                         onChange={handleBannerChange}
+                        onRemove={removeBanner}
                     />
                 </Box>
             </Grid>

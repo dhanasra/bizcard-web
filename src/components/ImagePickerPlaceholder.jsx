@@ -1,8 +1,9 @@
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, IconButton, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import ImageCropper from './ImageCropper'
+import { FiX } from 'react-icons/fi';
 
-function ImagePickerPlaceholder({text, picture, width, onChange}) {
+function ImagePickerPlaceholder({text, picture, width, onChange, onRemove}) {
 
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState(null);
@@ -22,6 +23,13 @@ function ImagePickerPlaceholder({text, picture, width, onChange}) {
             return image;
         });
     };
+
+    const removeImage = ()=>{
+        setCroppedImage((_)=>{
+            onRemove();
+            return null;
+        });
+    }
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -44,28 +52,39 @@ function ImagePickerPlaceholder({text, picture, width, onChange}) {
             style={{ display: 'none' }}
             id={`fileInput-${text}`}
             />
-        <label htmlFor={`fileInput-${text}`}>
             <Box
                 sx={{
-                    cursor: "pointer",
                     width: width ?? "132px",
                     height: "132px",
                     border: "2px dashed #E2E8F0",
                     borderRadius: "8px",
                     background: "#F7FAFC",
+                    position: "relative",
                     padding: "4px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
                 }}
             >
-                {
-                croppedImage 
-                    ? <img src={croppedImage} width={"100%"} height={"100%"} style={{borderRadius: "8px"}} alt="Preview" />
-                    : <Typography variant='body3'>{text ?? "Upload Picture"}</Typography>
-                }
+                { croppedImage && <IconButton onClick={removeImage} sx={{position: "absolute", zIndex: "1000", top: 8, right: 8, background: "#00000033"}}>
+                    <FiX color='#fff' fontSize={"22px"} />
+                </IconButton> }
+                <label htmlFor={`fileInput-${text}`}>
+                    <Box
+                        sx={{
+                            cursor: "pointer",
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    >
+                    {
+                    croppedImage 
+                        ? <img src={croppedImage} width={"100%"} height={"100%"} style={{borderRadius: "8px", cursor: "pointer"}} alt="Preview" />
+                        : <Typography variant='body3'>{text ?? "Upload Picture"}</Typography>
+                    }
+                    </Box>
+                </label>
             </Box>
-        </label>
         <ImageCropper
           open={open}
           image={image}
