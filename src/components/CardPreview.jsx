@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Divider, Grid, Typography } from '@mui/material'
 import { makeStyles } from "@mui/styles";
 import React from 'react'
 import { FiGlobe, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
@@ -114,13 +114,15 @@ function CardPreview() {
                         <Typography variant="caption" sx={{textAlign: "center", flexGrow: 1}}>Follow Me On</Typography>
                     </Divider> }
 
-                    { cardData?.fields && <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} spacing={2}>
+                    { cardData?.fields && <Grid container alignItems={"center"} justifyContent={"center"} spacing={2}>
                         {cardData.fields.map((field)=>(
-                            <Avatar sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer"}}>
-                                <img src={`https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${getFieldIcon(field.id)}`} width={32} height={32} alt={""}/>
-                            </Avatar>
+                            <Grid item key={field._id} sm={2}>
+                                <Avatar sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer"}}>
+                                    <img src={`https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${getFieldIcon(field.id)}`} width={32} height={32} alt={""}/>
+                                </Avatar>
+                            </Grid>
                         ))}  
-                    </Stack> }
+                    </Grid> }
 
                 </Box>
                 

@@ -33,7 +33,7 @@ export function generateRandomId() {
 
 export const anyNotEmpty = (obj) => {
     if (Object.keys(obj).length === 0) {
-      return true;
+      return false;
     }
   
     return Object.values(obj).some(([key, value]) => value && value !== "");

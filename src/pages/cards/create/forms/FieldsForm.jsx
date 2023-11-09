@@ -14,35 +14,45 @@ function FieldsForm() {
   const [fields, setFields] = useState(cardData?.fields??[]);
 
   const handleChange=(field)=>{
-    setFields([...fields, field]);
-    dispatch(updateCardData({path: "fields", value: fields}));
+    setFields(prevFields => {
+      const updated = [...prevFields, field]
+      dispatch(updateCardData({ path: "fields", value: updated }));
+      return updated;
+    });
   } 
 
   const removeField=(id)=>{
-    setFields(fields.filter(item => item._id !== id));
-    dispatch(updateCardData({path: "fields", value: fields}));
+    setFields(prevFields => {
+      const updated = prevFields.filter(item => item._id !== id);
+      dispatch(updateCardData({ path: "fields", value: updated }));
+      return updated;
+    });
   } 
 
   const handleValueChange=(id, value)=>{
-    const updated = fields.map(item => {
-      if (item._id === id) {
-        return { ...item, value: value };
-      }
-      return item;
+    setFields(prevFields => {
+      const updated = prevFields.map(item => {
+        if (item._id === id) {
+          return { ...item, value: value };
+        }
+        return item;
+      });
+      dispatch(updateCardData({ path: "fields", value: updated }));
+      return updated;
     });
-    setFields(updated);
-    dispatch(updateCardData({path: "fields", value: updated}));
   } 
 
   const handleNameChange=(id, value)=>{
-    const updated = fields.map(item => {
-      if (item._id === id) {
-        return { ...item, name: value };
-      }
-      return item;
+    setFields(prevFields => {
+      const updated = prevFields.map(item => {
+        if (item._id === id) {
+          return { ...item, name: value };
+        }
+        return item;
+      });
+      dispatch(updateCardData({ path: "fields", value: updated }));
+      return updated;
     });
-    setFields(updated);
-    dispatch(updateCardData({path: "fields", value: updated}));
   }
 
   const handleDragEnd = (result) => {
@@ -50,12 +60,15 @@ function FieldsForm() {
       return;
     }
 
-    const reorderedItems = Array.from(fields);
-    const [reorderedItem] = reorderedItems.splice(result.source.index, 1);
-    reorderedItems.splice(result.destination.index, 0, reorderedItem);
+    setFields(prevFields => {
+      
+      const reorderedItems = Array.from(prevFields);
+      const [reorderedItem] = reorderedItems.splice(result.source.index, 1);
+      reorderedItems.splice(result.destination.index, 0, reorderedItem);
 
-    setFields(reorderedItems);
-    dispatch(updateCardData({path: "fields", value: reorderedItems}));
+      dispatch(updateCardData({ path: "fields", value: reorderedItems }));
+      return reorderedItems;
+    });
   };
 
   return (
