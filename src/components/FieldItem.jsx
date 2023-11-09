@@ -18,7 +18,7 @@ function FieldItem({field, onCancel, onValueChange, onNameChange}) {
         <Box sx={{marginBottom: "20px", display: "flex",alignItems: "center"}}>
             <FiMenu fontSize={24}/>
             <Typography mx={2} sx={{flexGrow: 1}}>{field.label}</Typography>
-            <IconButton onClick={()=>onCancel(field._id)}>
+            <IconButton onClick={()=>onCancel(field.identifier)}>
                 <Close/>
             </IconButton>
         </Box>
@@ -26,7 +26,7 @@ function FieldItem({field, onCancel, onValueChange, onNameChange}) {
             label={"Link / Web Address"} 
             sx={{marginBottom: "16px"}}
             value={field.value??""} 
-            onChange={(event)=>onValueChange(field._id, event.target.value)}
+            onChange={(event)=>onValueChange(field.identifier, event.target.value)}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
@@ -38,7 +38,7 @@ function FieldItem({field, onCancel, onValueChange, onNameChange}) {
             <TextField 
             label={"Display Text"} 
             value={field.name??""} 
-            onChange={(event)=>onNameChange(field._id, event.target.value)}
+            onChange={(event)=>onNameChange(field.identifier, event.target.value)}
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">

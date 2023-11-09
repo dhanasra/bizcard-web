@@ -23,7 +23,7 @@ function FieldsForm() {
 
   const removeField=(id)=>{
     setFields(prevFields => {
-      const updated = prevFields.filter(item => item._id !== id);
+      const updated = prevFields.filter(item => item.identifier !== id);
       dispatch(updateCardData({ path: "fields", value: updated }));
       return updated;
     });
@@ -32,7 +32,7 @@ function FieldsForm() {
   const handleValueChange=(id, value)=>{
     setFields(prevFields => {
       const updated = prevFields.map(item => {
-        if (item._id === id) {
+        if (item.identifier === id) {
           return { ...item, value: value };
         }
         return item;
@@ -45,7 +45,7 @@ function FieldsForm() {
   const handleNameChange=(id, value)=>{
     setFields(prevFields => {
       const updated = prevFields.map(item => {
-        if (item._id === id) {
+        if (item.identifier === id) {
           return { ...item, name: value };
         }
         return item;
@@ -88,7 +88,7 @@ function FieldsForm() {
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {fields.map((value, index) => (
-                    <Draggable key={value._id} draggableId={value._id} index={index}>
+                    <Draggable key={value.identifier} draggableId={value.identifier} index={index}>
                       {(provided) => (
                         <div
                           ref={provided.innerRef}
