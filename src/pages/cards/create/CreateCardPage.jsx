@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CommonAppBar from '../../../components/CommonAppBar'
 import Sider from '../../../components/Sider'
 import useStyles from './style';
@@ -9,9 +9,11 @@ import FieldsForm from './forms/FieldsForm';
 import GeneralForm from './forms/GeneralForm';
 import CardForm from './forms/CardForm';
 import BusinessForm from './forms/BusinessForm';
-import { CardBuilderStore } from '../../../features/cardBuilder/cardBuilderStore';
-import { Provider } from 'react-redux';
 import CardPreview from '../../../components/CardPreview';
+import WindowLoader from '../../../components/WindowLoader';
+import { useNavigate } from 'react-router-dom';
+import { saveBizcard } from '../../../network/service/cardService';
+import { useSelector } from 'react-redux';
 
 function a11yProps(index) {
     return {
@@ -24,10 +26,27 @@ function a11yProps(index) {
 function CreateCardPage() {
 
     const classes = useStyles();
+    const navigate = useNavigate();
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const [value, setValue] = useState(0);
+
+    const [loading, setLoading] = useState(false);
+
+    const cardData = useSelector((state) => state.cardBuilder.cardData);
+    const [updated, setUpdated] = useState({ ...cardData });
+
+    useEffect(() => {
+        setUpdated({ ...cardData });
+    }, [cardData]);
+
+    const saveCard =async ()=>{
+        setLoading(true);
+        await saveBizcard(updated);
+        setLoading(false);
+        navigate("/app/cards");
+    }
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -35,8 +54,10 @@ function CreateCardPage() {
 
   return (
     <Box className={classes.window}>
+
+        {loading && <WindowLoader/>}
+        
         <CommonAppBar />
-        <Provider store={CardBuilderStore}>
         <Box className={classes.outerBox}>
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
@@ -63,7 +84,11 @@ function CreateCardPage() {
                         }
                     </Box>
                     <Stack direction={"row-reverse"} spacing={2} sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", display: "flex",p: 2}}>
-                        <Button variant="contained" sx={{width: "120px"}} disableElevation>Save</Button>
+                        <Button 
+                            variant="contained" 
+                            sx={{width: "120px"}} 
+                            onClick={saveCard} 
+                            disableElevation>Save</Button>
                         <Button variant="outlined" sx={{width: "120px", marginRight: "16px"}}>Cancel</Button>
                     </Stack>
                 </Box>
@@ -73,7 +98,6 @@ function CreateCardPage() {
                 </Box>}
             </Box>
         </Box>
-        </Provider>
     </Box>
   )
 }

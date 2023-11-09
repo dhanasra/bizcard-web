@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { checkCookies } from "../utils/utils";
 import { AppStore } from "../features/app/appStore";
 import LoaderPage from "../pages/loader/LoaderPage";
+import { RootStore } from "../features/rootReducer";
 
 const CheckAuthAndStorage = ({ children }) => {
     const navigate = useNavigate();
@@ -89,7 +90,11 @@ const router = [
     },
     {
         path: '/app/cards/create',
-        element: <CreateCardPage/>
+        element: (
+            <Provider store={RootStore}> 
+                <CreateCardPage/> 
+            </Provider>
+        )
     },
     {
         path: '/app/cards/view',
