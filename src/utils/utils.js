@@ -30,3 +30,15 @@ export function clearCache(){
 export function generateRandomId() {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
+
+export const anyNotEmpty = (obj) => {
+    if (Object.keys(obj).length === 0) {
+      return true;
+    }
+  
+    return Object.values(obj).some(([key, value]) => value && value !== "");
+};
+
+export const getFieldIcon = (fieldId) => {
+    return window.config.fieldTypes.find(obj => obj._id === fieldId).icon;
+};

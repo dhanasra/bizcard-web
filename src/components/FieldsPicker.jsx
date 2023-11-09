@@ -65,6 +65,7 @@ function FieldsPicker({onAddField}) {
                                     const uniqueId = generateRandomId();
                                     onAddField({
                                         _id: uniqueId,
+                                        id: val._id,
                                         label: val.label,
                                         icon: val.icon
                                     })

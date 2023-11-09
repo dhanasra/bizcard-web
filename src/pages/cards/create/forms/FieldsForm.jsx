@@ -97,7 +97,6 @@ function FieldsForm() {
               )}
             </Droppable>
           </DragDropContext>
-          {/* <ReorderListField fields={fields} onCancel={removeField}/> */}
         </Box>
         <FieldsPicker onAddField={handleChange}/>
     </Stack>

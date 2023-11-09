@@ -26,10 +26,10 @@ function BusinessForm() {
                 <TextField label={"Title"} value={cardData?.company?.title??""} onChange={(event)=>handleChange("company.title", event)} fullWidth/>
             </Grid>
             <Grid item xs={6} >
-                <TextField label={"Department"} value={cardData?.company?.department??""} onChange={(event)=>handleChange("company.department", event)} fullWidth/>
+                <TextField label={"Company Name"} value={cardData?.company?.companyName??""} onChange={(event)=>handleChange("company.companyName", event)} fullWidth/>
             </Grid>
             <Grid item xs={6} >
-                <TextField label={"Company Name"} value={cardData?.company?.companyName??""} onChange={(event)=>handleChange("company.companyName", event)} fullWidth/>
+                <TextField label={"Department"} value={cardData?.company?.department??""} onChange={(event)=>handleChange("company.department", event)} fullWidth/>
             </Grid>
             <Grid item xs={6} >
                 <TextField label={"Company Website"} value={cardData?.company?.companyWebsite??""} onChange={(event)=>handleChange("company.companyWebsite", event)} fullWidth/>

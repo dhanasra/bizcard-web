@@ -39,7 +39,7 @@ const theme = createTheme({
         labelLight: {
             fontSize: '0.85em',
             lineHeight: '2',
-            color: '#999',
+            color: '#666',
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
@@ -59,7 +59,12 @@ const theme = createTheme({
         },
         h5: {
             fontWeight: 600,
-        }
+        },
+        titleBold: {
+            fontSize: '1.1em',
+            fontWeight: 600,
+            fontFamily: 'sans-serif',
+        },
     },
     palette: {
         bgGrey: createColor("#EEE7"),

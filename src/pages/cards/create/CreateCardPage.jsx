@@ -9,9 +9,9 @@ import FieldsForm from './forms/FieldsForm';
 import GeneralForm from './forms/GeneralForm';
 import CardForm from './forms/CardForm';
 import BusinessForm from './forms/BusinessForm';
-import PhonePreview from '../../../components/PhonePreview';
 import { CardBuilderStore } from '../../../features/cardBuilder/cardBuilderStore';
 import { Provider } from 'react-redux';
+import CardPreview from '../../../components/CardPreview';
 
 function a11yProps(index) {
     return {
@@ -40,6 +40,7 @@ function CreateCardPage() {
         <Box className={classes.outerBox}>
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
+
                 <Box className={`${classes.content} ${isSmallScreen ? `${classes.contentMax} ${classes.gapless}` : ''}`}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', ...isSmallScreen? {width: window.innerWidth}: {} }}>
                         <Tabs 
@@ -64,7 +65,7 @@ function CreateCardPage() {
                 </Box>
                 
                 {!isSmallScreen && <Box className={classes.previewBox}>
-                    <PhonePreview/>
+                    <CardPreview/>
                 </Box>}
             </Box>
         </Box>
