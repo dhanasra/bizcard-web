@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function CardItem() {
+function CardItem({card}) {
 
     const classes = useStyles();
 
@@ -43,12 +43,12 @@ function CardItem() {
             >
                 <div>
                     <img src={logo} width={30} height={30} alt='logo'/>
-                    <Typography variant="body1">Dhana Sekaran R</Typography>
-                    <Typography variant="caption">Flutter Developer</Typography>
+                    <Typography variant="body1">{card.name?.prefix} {card.name?.firstName} {card.name?.middleName} {card.name?.lastName}</Typography>
+                    <Typography variant="caption">{card.company?.title}</Typography>
                 </div>
 
                 <div>
-                    <Chip label="Work" color="secondary"/>
+                    <Chip label={card?.cardName} color="secondary"/>
                 </div>
             </Box>
             <Box
@@ -58,16 +58,17 @@ function CardItem() {
                     position: "relative"
                 }}
             >
+                { (card.picture || card.logo || card.banner) &&
                 <img 
-                    alt="pictur"
+                    alt=""
                     height="100%"
                     style={{
                         position: "relative",
                         borderRadius: "0 6px 6px 0"
                     }}
                     className={classes.image}
-                    src={"https://cloud.githubusercontent.com/assets/6893715/21904006/e307032c-d8b6-11e6-9e4a-52dccfedf8a5.jpg"}
-                />
+                    src={card.picture || card.logo || card.banner}
+                />}
                 <Box
                     sx={{   
                         left: "-10px",

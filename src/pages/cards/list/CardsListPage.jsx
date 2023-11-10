@@ -52,9 +52,13 @@ function CardsListPage() {
                         </Box>
                         <Box className={classes.cardsWrapper}>
                             <Grid container p={isSmallScreen ? 2: 3} spacing={2} >
-                                <Grid item xl={3} lg={4}  md={6}  xs={12}>
-                                    <CardItem/>
-                                </Grid>
+                                {
+                                    cards.map((card)=>(
+                                        <Grid item xl={3} lg={4}  md={6}  xs={12}>
+                                            <CardItem card={card}/>
+                                        </Grid>
+                                    ))
+                                }
                             </Grid>
                         
                         </Box>
