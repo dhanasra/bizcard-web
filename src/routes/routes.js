@@ -44,7 +44,7 @@ const CheckAuthAndStorage = ({ children }) => {
                 }
             }
         }else{
-            if(!isLoggedIn){
+            if(!isLoggedIn && currentLocation.pathname.includes('/app/p/card')){
                 navigate('/signin');
             }else if(!hasLocalStorage){
                 Cookies.set('redirect', currentLocation.pathname);
