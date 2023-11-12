@@ -34,7 +34,7 @@ function QRCodeView({cardId}) {
         >
             <QRCode
                 quietZone={0}
-                value={`http://localhost:3000/app/p/card/${cardId}`}
+                value={`${window.origin}/app/p/card/${cardId}`}
                 logoImage={logoBg}  
                 eyeRadius={[[10, 10, 0, 10], [10, 10, 10, 0], [10, 0, 10, 10]]}
                 qrStyle='dots'
