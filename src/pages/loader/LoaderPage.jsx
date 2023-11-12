@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchMainData } from '../../network/service/appService';
 import { initializeApp } from '../../features/app/appSlice';
 import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
 
 function LoaderPage() {
 
@@ -18,8 +19,10 @@ function LoaderPage() {
         const initApp=async()=>{
             const data = await fetchMainData();
             dispatch(initializeApp(data));
+
+            const redirect = Cookies.get('redirect');
             
-            navigate('/app/cards');
+            navigate(redirect ?? '/app/cards');
         }
         initApp();
     })

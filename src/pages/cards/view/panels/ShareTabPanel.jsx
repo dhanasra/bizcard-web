@@ -8,7 +8,10 @@ import { useLocation } from 'react-router-dom';
 function ShareTabPanel() {
 
     const {state} = useLocation();
+
+
     const card = state.card;
+    console.log(`${window.origin}/app/p/card/${card._id}`);
 
   return (
     <Box

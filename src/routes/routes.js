@@ -20,6 +20,7 @@ import { AppStore } from "../features/app/appStore";
 import LoaderPage from "../pages/loader/LoaderPage";
 import { RootStore } from "../features/rootReducer";
 import BizcardPage from "../pages/bizcard/BizcardPage";
+import Cookies from "js-cookie";
 
 const CheckAuthAndStorage = ({ children }) => {
     const navigate = useNavigate();
@@ -46,6 +47,7 @@ const CheckAuthAndStorage = ({ children }) => {
             if(!isLoggedIn){
                 navigate('/signin');
             }else if(!hasLocalStorage){
+                Cookies.set('redirect', currentLocation.pathname);
                 navigate('/loading'); 
             }
         }
