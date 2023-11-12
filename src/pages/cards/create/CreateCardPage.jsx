@@ -94,7 +94,7 @@ function CreateCardPage() {
                 </Box>
                 
                 {!isSmallScreen && <Box className={classes.previewBox}>
-                    <CardPreview/>
+                    <CardPreview cardData={updated}/>
                 </Box>}
             </Box>
         </Box>

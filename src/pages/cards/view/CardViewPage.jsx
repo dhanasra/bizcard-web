@@ -10,6 +10,8 @@ import ShareTabPanel from './panels/ShareTabPanel';
 import AnalyticsTabPanel from './panels/AnalyticsTabPanel';
 import SettingsTabPanel from './panels/SettingsTabPanel';
 import CardViewAppBar from '../../../components/CardViewAppBar';
+import { useLocation } from 'react-router-dom';
+import CardPreview from '../../../components/CardPreview';
 
 function a11yProps(index) {
     return {
@@ -22,6 +24,9 @@ function a11yProps(index) {
 function CardViewPage() {
 
     const classes = useStyles();
+
+    const {state} = useLocation();
+    const card = state.card;
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -38,7 +43,10 @@ function CardViewPage() {
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
                 <Box className={`${isSmallScreen ? classes.gapless: ''} ${classes.content}`}>
-                    <Box
+                    <Box className={classes.previewBox}>
+                        <CardPreview cardData={card} removeGap={true}/>
+                    </Box>
+                    {/* <Box
                         sx={{
                             width: "420px",
                             background: "#fff",
@@ -63,7 +71,7 @@ function CardViewPage() {
                                 <path d="M0,180 C150,100 350,0 600,00 L500,00 L0,0 Z" style={{stroke: "none", fill:"#556080"}}></path>
                             </svg>  
                         </Box>
-                    </Box>
+                    </Box> */}
 
                     {
                         !isSmallScreen && <Box

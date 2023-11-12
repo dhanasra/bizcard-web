@@ -19,6 +19,7 @@ import { checkCookies } from "../utils/utils";
 import { AppStore } from "../features/app/appStore";
 import LoaderPage from "../pages/loader/LoaderPage";
 import { RootStore } from "../features/rootReducer";
+import BizcardPage from "../pages/bizcard/BizcardPage";
 
 const CheckAuthAndStorage = ({ children }) => {
     const navigate = useNavigate();
@@ -94,6 +95,14 @@ const router = [
             <Provider store={RootStore}> 
                 <CreateCardPage/> 
             </Provider>
+        )
+    },
+    {
+        path: '/app/p/card/:cardId',
+        element: (
+          <Provider store={RootStore}>
+            <BizcardPage />
+          </Provider>
         )
     },
     {

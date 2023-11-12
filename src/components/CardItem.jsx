@@ -21,7 +21,13 @@ function CardItem({card}) {
 
   return (
     <Box 
-        onClick={()=>navigate('/app/cards/view')}
+        onClick={
+            ()=>navigate(
+                // `/app/p/card/${card._id}`,
+                '/app/cards/view', 
+                { state: { card: card }}
+            )
+        }
         sx={{
             cursor: "pointer",
             background: "#fff", 

@@ -54,7 +54,7 @@ function CardsListPage() {
                             <Grid container p={isSmallScreen ? 2: 3} spacing={2} >
                                 {
                                     cards.map((card)=>(
-                                        <Grid item xl={3} lg={4}  md={6}  xs={12}>
+                                        <Grid key={card._id} item xl={3} lg={4}  md={6}  xs={12}>
                                             <CardItem card={card}/>
                                         </Grid>
                                     ))

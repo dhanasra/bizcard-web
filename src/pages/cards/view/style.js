@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme)=>{
         gapless: {
             margin: "0px"
         },
+        previewBox: {
+            width: "400px"
+        },
         toolbar: {
             display: "flex", 
             justifyContent: "space-between",

@@ -3,8 +3,13 @@ import React from 'react'
 import QRCodeView from '../../../../components/QRCodeView'
 import { BiLogoFacebookCircle, BiLogoGmail, BiLogoInstagramAlt, BiLogoLinkedinSquare } from 'react-icons/bi';
 import { PiCopyLight } from 'react-icons/pi';
+import { useLocation } from 'react-router-dom';
 
 function ShareTabPanel() {
+
+    const {state} = useLocation();
+    const card = state.card;
+
   return (
     <Box
         sx={{
@@ -16,7 +21,7 @@ function ShareTabPanel() {
         }}
     >
 
-        <QRCodeView/>
+        <QRCodeView cardId={card._id}/>
         <Typography variant="body2">Scan or Tap on the QR Code to preview.</Typography>
         <Button
             variant="contained"

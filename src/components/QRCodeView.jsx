@@ -4,7 +4,7 @@ import { QRCode } from 'react-qrcode-logo'
 import theme from '../utils/theme'
 import logoBg from '../assets/logo/logo-bg.png'
 
-function QRCodeView() {
+function QRCodeView({cardId}) {
   return (
     <Box sx={{
         m: 3,
@@ -34,7 +34,7 @@ function QRCodeView() {
         >
             <QRCode
                 quietZone={0}
-                value="https://github.com/gcoro/react-qrcode-logo" 
+                value={`http://localhost:3000/app/p/card/${cardId}`}
                 logoImage={logoBg}  
                 eyeRadius={[[10, 10, 0, 10], [10, 10, 10, 0], [10, 0, 10, 10]]}
                 qrStyle='dots'

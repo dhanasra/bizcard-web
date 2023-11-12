@@ -2,7 +2,6 @@ import { Avatar, Box, Divider, Grid, Typography } from '@mui/material'
 import { makeStyles } from "@mui/styles";
 import React from 'react'
 import { FiGlobe, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
 import IconTextRow from './IconTextRow';
 import Header from './Header';
 import HtmlViewer from './HtmlViewer';
@@ -36,15 +35,19 @@ const useStyle = makeStyles({
         display: "flex",
         flexDirection: "column",
         borderRadius: "4px",
-        boxShadow: "0px 2px 30px #ccc6"
     },
+    gapLess: {
+        background: "none",
+        margin: "16px",
+        padding: "0px"
+    }
 })
 
-function CardPreview() {
+function CardPreview({cardData, removeGap}) {
 
     const classes = useStyle();
 
-    const cardData = useSelector((state) => state.cardBuilder.cardData);
+    // const cardData = useSelector((state) => state.cardBuilder.cardData);
 
     const primaryColor = "#6DD3C7"
     const background = "#fff"
@@ -54,7 +57,7 @@ function CardPreview() {
     console.log(cardData?.design);
 
   return (
-    <Box className={classes.outerbox}>
+    <Box className={`${ removeGap && classes.gapLess} ${classes.outerbox} `}>
         <Box className={classes.screen}>
             <Box className={classes.content} sx={{background: primaryColor}}>
                 { cardData?.picture && <div
