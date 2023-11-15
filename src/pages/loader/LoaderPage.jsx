@@ -4,10 +4,11 @@ import Lottie from 'react-lottie'
 import loadingAnimation from '../../assets/lotties/loading.json'
 import useStyles from './style';
 import { useNavigate } from 'react-router-dom';
-import { fetchMainData } from '../../network/service/appService';
+import { fetchConfigData, fetchMainData } from '../../network/service/appService';
 import { initializeApp } from '../../features/app/appSlice';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
+import { checkCookies } from '../../utils/utils';
 
 function LoaderPage() {
 
@@ -17,7 +18,9 @@ function LoaderPage() {
 
     useEffect(()=>{
         const initApp=async()=>{
-            const data = await fetchMainData();
+            const isLoggedIn = checkCookies();
+
+            const data = isLoggedIn ? await fetchMainData() : await fetchConfigData();
             dispatch(initializeApp(data));
 
             const redirect = Cookies.get('redirect');

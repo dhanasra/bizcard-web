@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi'
 import { PiCopyLight, PiDownloadLight, PiHeartLight } from 'react-icons/pi'
 import theme from '../utils/theme';
 import { objectToTextReadableFormat } from '../utils/utils';
+import html2pdf from 'html2pdf.js';
 
 function SaveContactDrawer(props) {
 
@@ -21,6 +22,28 @@ function SaveContactDrawer(props) {
         navigator.clipboard.writeText(contactInfo);
         setShowSnackbar(true);
     }
+
+    const pdfOptions = {
+        margin: 0,
+        filename: 'my-pdf.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3},
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    };
+
+    const downloadCard = () => {
+        const element = document.getElementById('contact-preview-container');
+        
+        html2pdf ()
+            .from(element)
+            .set(pdfOptions)
+            .save();
+    };
+
+    const shareCard = () => {
+        props.onShare();
+    }
+
 
   return (
     <div>
@@ -65,7 +88,7 @@ function SaveContactDrawer(props) {
 
                 <TextField label={"Your Email Address"} onChange={handleEmailChange} value={email} fullWidth/>
                 
-                <Button  variant="contained" onClick={()=>{}} disableElevation fullWidth>Receive Via Email</Button>
+                <Button  variant="contained" onClick={shareCard} disableElevation fullWidth>Receive Via Email</Button>
 
                 <Divider>
                     <Typography variant="body2" >Or</Typography>
@@ -73,7 +96,7 @@ function SaveContactDrawer(props) {
 
                 <Stack direction={"row"} spacing={2}>
                     <Button onClick={copyInfo} startIcon={<PiCopyLight/>}  variant="outlined" disableElevation fullWidth>Copy Info</Button>
-                    <Button startIcon={<PiDownloadLight/>} variant="outlined" onClick={()=>{}} disableElevation fullWidth>Download Info</Button>
+                    <Button onClick={downloadCard} startIcon={<PiDownloadLight/>} variant="outlined" disableElevation fullWidth>Download Info</Button>
                 </Stack>
 
             </Stack>

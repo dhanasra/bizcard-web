@@ -8,6 +8,7 @@ import useStyles from './style';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmail } from '../../network/service/authService';
 import WindowLoader from '../../components/WindowLoader';
+import Cookies from 'js-cookie';
 
 function SignInPage() {
 
@@ -28,7 +29,13 @@ function SignInPage() {
         setLoading(true);
         await signInWithEmail({email: email, password: password});
         setLoading(false);
-        navigate('/app/cards');
+        const authRedirect = Cookies.get('auth-redirect');
+        if(authRedirect){
+            Cookies.remove('auth-redirect');
+            navigate(authRedirect);
+        }else{
+            navigate('/app/cards');
+        }
     }
 
   return (

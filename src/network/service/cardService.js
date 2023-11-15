@@ -2,8 +2,8 @@ import { handleBase64Image } from "../../utils/utils";
 import axiosClient from "../axiosClient";
 
 
-export async function getCardDetails(cardId){
-    return await axiosClient.get(`/card?cardId=${cardId}`);
+export async function getCardPreviewDetails(cardId){
+    return await axiosClient.get(`/card-preview?cardId=${cardId}`);
 }
 
 export async function saveBizcard(data){

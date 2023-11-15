@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import WindowLoader from '../../components/WindowLoader';
 import { useSelector } from 'react-redux';
 import { setupCard } from '../../network/service/setupService';
+import Cookies from 'js-cookie';
 
 function SetUpPage() {
 
@@ -41,7 +42,13 @@ function SetUpPage() {
       setLoading(true);
       await setupCard(formData);
       setLoading(false);
-      navigate('/app/cards');
+      const authRedirect = Cookies.get('auth-redirect');
+      if(authRedirect){
+          Cookies.remove('auth-redirect');
+          navigate(authRedirect);
+      }else{
+          navigate('/app/cards');
+      }
   }
 
   return (

@@ -150,9 +150,9 @@ function CardPreview({cardData, removeGap}) {
                     { cardData?.fields && <Grid container alignItems={"center"} justifyContent={"center"} spacing={2}>
                         {cardData.fields.map((field)=>(
                             <Grid item key={field._id} sm={2}>
-                                <Avatar sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer"}}>
+                                <Box sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer"}}>
                                     <img src={`https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${getFieldIcon(field.id)}`} width={32} height={32} alt={""}/>
-                                </Avatar>
+                                </Box>
                             </Grid>
                         ))}  
                     </Grid> }

@@ -26,35 +26,43 @@ const CheckAuthAndStorage = ({ children }) => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.app.user);
     const currentLocation = useLocation();
-  
+
     useEffect(() => {
-      const isLoggedIn = checkCookies();
+        const isLoggedIn = checkCookies();
+        const hasLocalStorage = user !== null;
+        const isUnAuthRoute = ['/', '/signin', '/signup', '/auth/callback', '/setup'].includes(currentLocation.pathname);
+        const isCardPath = currentLocation.pathname.includes('/app/p/card');
+        const isConfig = window.config!=null;
 
-      const hasLocalStorage = user!=null;
+        if (isLoggedIn && isCardPath) {
+            if (!hasLocalStorage) {
+                Cookies.set('redirect', currentLocation.pathname);
+                navigate('/loading');
+            }
+        } else if (isLoggedIn && isCardPath && hasLocalStorage) {
 
-      const isUnAuthRoute = ['/', '/signin', '/signup', '/auth/callback', '/setup'].includes(currentLocation.pathname);
+        } else if (!isLoggedIn && !isConfig && isCardPath) {
+            Cookies.set('redirect', currentLocation.pathname);
+            navigate('/loading');
+        } else if(isConfig && isCardPath){
 
-      if(currentLocation.pathname!=='/loading'){
-        if (isUnAuthRoute) {
-            if(isLoggedIn){
-                if(hasLocalStorage){
-                    navigate('/app/cards');
-                }else{
+        } else if (currentLocation.pathname !== '/loading') {
+            if (isUnAuthRoute) {
+                if (isLoggedIn) {
+                    navigate(hasLocalStorage ? '/app/cards' : '/loading');
+                }
+            } else {
+                if (!isLoggedIn && isCardPath) {
+                    navigate('/signin');
+                } else if (!hasLocalStorage) {
+                    Cookies.set('redirect', currentLocation.pathname);
                     navigate('/loading');
                 }
             }
-        }else{
-            if(!isLoggedIn && currentLocation.pathname.includes('/app/p/card')){
-                navigate('/signin');
-            }else if(!hasLocalStorage){
-                Cookies.set('redirect', currentLocation.pathname);
-                navigate('/loading'); 
-            }
         }
-      }
 
     }, [user, navigate, currentLocation]);
-  
+
     return <>{children}</>;
 };
 
