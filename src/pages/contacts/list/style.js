@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme)=>{
         content: {
             display: "flex",
             flexDirection: "column",
-            width: "100%", 
+            flexGrow: 1,
             height: "calc(100% - 16px)",
             background: "#fff", 
             margin: "16px 16px 0 16px", 

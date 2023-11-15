@@ -46,32 +46,6 @@ function CardViewPage() {
                     <Box className={classes.previewBox}>
                         <CardPreview cardData={card} removeGap={true}/>
                     </Box>
-                    {/* <Box
-                        sx={{
-                            width: "420px",
-                            background: "#fff",
-                            boxShadow: "0px 2px 30px #ccc6",
-                            borderRadius: "8px",
-                            mx: isSmallScreen? 2 : 4,
-                            my: isSmallScreen? 2 : 2,
-                            minHeight: "400px"
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: "50px",
-                                background: "#556080",
-                                borderRadius: "8px 8px 0 0"
-                            }}
-                        />
-
-                        <Box sx={{width: "auto", height: "70px"}}>
-                            <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                                <path d="M0,180 C150,100 350,0 600,00 L500,00 L0,0 Z" style={{stroke: "none", fill:"#556080"}}></path>
-                            </svg>  
-                        </Box>
-                    </Box> */}
 
                     {
                         !isSmallScreen && <Box

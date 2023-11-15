@@ -1,47 +1,70 @@
-import { Box, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Typography } from '@mui/material'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { designs, getDesign } from '../utils/utils';
 
-function ContactItem() {
+function ContactItem({cardData, onTap}) {
 
-    const navigate = useNavigate();
+    const cardDesign = cardData?.design??designs[0].name;
+    const primaryColor = "#6DD3C7"
 
   return (
-    <Box
-        onClick={()=>navigate('/app/contacts/view')}
-        sx={{
-            cursor: "pointer",
-            background: "#fff", 
-            height: "200px", 
-            width: "100%", 
-            borderRadius: "6px",
-            display: "flex",
-            flexDirection: "column",
-            boxShadow: "0px 2px 30px #ccc6"
-        }}
-    >
-        <Box sx={{display: "flex", flexDirection: "column", width: "100%"}} >
             <Box
+                onClick={()=>onTap()}
                 sx={{
-                    width: "100%",
-                    height: "28px",
-                    background: "#556080",
-                    borderRadius: "16px 16px 0 0"
+                    cursor: "pointer",
+                    background: "#fff", 
+                    height: "220px", 
+                    width: "100%", 
+                    borderRadius: "6px",
+                    display: "flex",
+                    flexDirection: "column",
+                    boxShadow: "0px 2px 30px #ccc6"
                 }}
-            />
-            <div style={{height: "60px"}}>
-                <svg viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                    <path d="M0,180 C150,100 350,0 600,00 L500,00 L0,0 Z" style={{stroke: "none", fill:"#556080"}}></path>
-                </svg>     
-            </div>    
-        </Box> 
+            >
+
+                { cardData?.picture && <div
+                    style={{
+                        position: "relative",
+                        height: "130px"
+                    }}
+                >
+
+                    {
+                        cardData?.picture && cardData?.banner && <Avatar
+                            src={cardData?.picture}
+                            sx={{
+                                width: 55, 
+                                height: 55,
+                                zIndex: 1000,
+                                position: "absolute", 
+                                bottom: "10%",
+                                right: "10%"
+                            }}
+                        />
+                    }
+                    <Box
+                        sx={{
+                            width: "100%",
+                            height: "100%",
+                            background: primaryColor,
+                            backgroundImage: `url(${cardData.banner ?? cardData.picture})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            borderRadius: "4px 4px 0 0",
+                            position: "absolute", 
+                        }}
+                    />
+
+                   {cardDesign!=="flat" && <Box sx={{width: "100%",  marginBottom: "-4px", position: "absolute", bottom: 0}}>
+                        <img src={getDesign(cardDesign).wave} alt="Wave SVG" style={{background: "#00000000"}}/>
+                    </Box> }
+                </div> }
 
         <Box p={2}>
-            <Stack>
-                <Typography variant="body1">Dhana Sekaran R</Typography>
-                <Typography variant="caption">Flutter Dev</Typography>
-                <Typography variant="caption">Instrive Softlabs Pvt Ltd</Typography>
-            </Stack>
+            <Typography variant="titleBold">{cardData?.name?.firstName} {cardData?.name?.lastName}</Typography>
+            <Box>
+                <Typography variant="labelLight">{cardData?.company?.title}</Typography>
+            </Box>
         </Box>
 
     </Box>

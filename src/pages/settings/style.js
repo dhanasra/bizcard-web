@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme)=>{
         },
         scroll: {
             flexGrow: 1,
-            overflow: "auto"
+            overflow: "auto",
+            paddingBottom: "32px",
         }
     })
 });

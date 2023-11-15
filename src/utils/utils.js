@@ -91,3 +91,34 @@ export const handleBase64Image = (base64String) => {
 
     return blob;
 };
+
+export function objectToTextReadableFormat(obj, depth = 0) {
+    let result = '';
+  
+    // Helper function to add indentation based on depth
+    const addIndentation = () => '  '.repeat(depth);
+  
+    // Iterate over the properties in the object
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const value = obj[key];
+  
+        // If the value is an object, recursively call the function
+        if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+          result += `${addIndentation()}${key}:\n${objectToTextReadableFormat(value, depth + 1)}`;
+        } else if (Array.isArray(value)) {
+          // If the value is an array, handle each element
+          result += `${addIndentation()}${key}:\n`;
+          // eslint-disable-next-line no-loop-func
+          value.forEach((element)=>{
+            result += `${addIndentation() + '  '}${objectToTextReadableFormat(element, depth + 2)}`;
+          });
+        } else {
+          // Otherwise, append the key-value pair to the result string
+          result += `${addIndentation()}${key}: ${value}\n`;
+        }
+      }
+    }
+  
+    return result;
+  }

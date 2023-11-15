@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ImageCropper from './ImageCropper'
 import { FiX } from 'react-icons/fi';
 
-function ImagePickerPlaceholder({text, picture, width, onChange, onRemove}) {
+function ImagePickerPlaceholder({text, picture, width, height, onChange, onRemove}) {
 
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState(null);
@@ -55,7 +55,7 @@ function ImagePickerPlaceholder({text, picture, width, onChange, onRemove}) {
             <Box
                 sx={{
                     width: width ?? "132px",
-                    height: "132px",
+                    height: height ?? "132px",
                     border: "2px dashed #E2E8F0",
                     borderRadius: "8px",
                     background: "#F7FAFC",
