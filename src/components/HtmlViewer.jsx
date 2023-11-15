@@ -3,7 +3,6 @@ import React from 'react'
 import ReactHtmlParser from "react-html-parser";
 
 function HtmlViewer({content}) {
-    console.log(content);
     const isVisible = content && (content.replace(/<[^>]*>/g, "").trim()!=="");
 
   return (

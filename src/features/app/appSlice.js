@@ -15,6 +15,7 @@ export const AppSlice = createSlice({
             state.user = action.payload?.user;
             state.contacts = action.payload?.contacts;
             state.cards = action.payload?.cards;
+            window.cards = action.payload?.cards;
             window.config = action.payload?.config;
         }
     }

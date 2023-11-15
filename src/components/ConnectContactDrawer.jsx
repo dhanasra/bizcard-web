@@ -4,6 +4,9 @@ import { FiX } from 'react-icons/fi'
 import { PiHandshakeLight } from 'react-icons/pi'
 import theme from '../utils/theme';
 import { HiCheckBadge, HiUser } from 'react-icons/hi2';
+import WindowLoader from './WindowLoader';
+import { createContact } from '../network/service/contactService';
+import { useNavigate } from 'react-router-dom';
 
 function ConnectContactDrawer(props) {
 
@@ -11,12 +14,30 @@ function ConnectContactDrawer(props) {
 
     const width = window.innerWidth;
 
-    const cards = [{_id: "1", cardName: "Personal"}, {_id: "2", cardName: "Work"}];
+    const cards = window.cards;
 
-    const [selected, setSelected] = useState(cards[0]._id);
+    const [selected, setSelected] = useState(cards?.length>0 ? cards[0] : null);
+    const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    const connectContact =async()=>{
+        setLoading(true);
+        const dataToSend = {
+            cardId: props.cardData._id,
+            friendId: props.cardData.createdBy,
+            myCardId: selected?._id
+        };
+        
+        await createContact(dataToSend);
+        
+        setLoading(false);
+        navigate('/app/contacts');
+    }
 
   return (
     <div>
+        {loading && <WindowLoader />}
         <Drawer
             open={props.open} 
             anchor="right"
@@ -41,14 +62,14 @@ function ConnectContactDrawer(props) {
 
             <Stack p={3} spacing={2}>
 
-                <Typography>Give My {selected.cardName} card to Dhana Sekaran</Typography>
+                <Typography>Give My {selected?.cardName} card to Dhana Sekaran</Typography>
 
                 <Box sx={{marginBottom: "8px"}}>
                     <Typography variant="labelLight">Change card type</Typography>
                 </Box>
 
                 {
-                    cards.map((card)=>{
+                    cards?.map((card)=>{
 
                         return <ListItem onClick={()=>setSelected(card)} key={card._id} sx={{border: `2px solid ${selected._id===card._id ? '#443': '#fff' }`, cursor: "pointer",boxShadow: "0px 2px 30px #ccc6", borderRadius: "3px", px: "12px", py: "10px", alignItems: "flex-center"}}>
                             <ListItemIcon sx={{minWidth: "32px", marginRight: "12px"}}>
@@ -62,7 +83,7 @@ function ConnectContactDrawer(props) {
                     })
                 }
 
-                <Button  variant="contained" onClick={()=>{}} disableElevation fullWidth>Connect</Button>
+                <Button  variant="contained" onClick={connectContact} sx={{marginTop: "32px"}} disableElevation fullWidth>Connect</Button>
 
 
             </Stack>

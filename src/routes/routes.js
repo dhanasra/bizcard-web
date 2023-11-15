@@ -34,6 +34,7 @@ const CheckAuthAndStorage = ({ children }) => {
         const isCardPath = currentLocation.pathname.includes('/app/p/card');
         const isConfig = window.config!=null;
 
+
         if (isLoggedIn && isCardPath) {
             if (!hasLocalStorage) {
                 Cookies.set('redirect', currentLocation.pathname);
@@ -49,7 +50,10 @@ const CheckAuthAndStorage = ({ children }) => {
         } else if (currentLocation.pathname !== '/loading') {
             if (isUnAuthRoute) {
                 if (isLoggedIn) {
-                    navigate(hasLocalStorage ? '/app/cards' : '/loading');
+                    const authRedirect = Cookies.get('auth-redirect');
+                    Cookies.remove('auth-redirect');
+
+                    navigate(hasLocalStorage ? (authRedirect ?? '/app/cards') : '/loading');
                 }
             } else {
                 if (!isLoggedIn && isCardPath) {

@@ -9,10 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmail } from '../../network/service/authService';
 import WindowLoader from '../../components/WindowLoader';
 import Cookies from 'js-cookie';
+import { fetchMainData } from '../../network/service/appService';
+import { useDispatch } from 'react-redux';
+import { initializeApp } from '../../features/app/appSlice';
 
 function SignInPage() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const classes = useStyles();
 
@@ -31,8 +35,8 @@ function SignInPage() {
         setLoading(false);
         const authRedirect = Cookies.get('auth-redirect');
         if(authRedirect){
-            Cookies.remove('auth-redirect');
-            navigate(authRedirect);
+            const data = await fetchMainData();
+            dispatch(initializeApp(data));
         }else{
             navigate('/app/cards');
         }

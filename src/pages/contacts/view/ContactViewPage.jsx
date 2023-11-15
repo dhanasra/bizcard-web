@@ -11,8 +11,6 @@ function ContactViewDrawer(props) {
 
     const width = window.innerWidth;
 
-    console.log(props.cardData);
-
   return (
     <div>
         <Drawer

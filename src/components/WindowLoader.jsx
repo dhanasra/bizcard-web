@@ -5,7 +5,7 @@ function WindowLoader() {
   return (
     <Box
         sx={{
-            zIndex: "1000",
+            zIndex: "5000",
             width: "100vw",
             height: "100vh",
             background: "#00000088",

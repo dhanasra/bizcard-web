@@ -54,8 +54,6 @@ function CardPreview({cardData, removeGap}) {
 
     const cardDesign = cardData?.design??designs[0].name;
 
-    console.log(cardData?.design);
-
   return (
     <Box className={`${ removeGap && classes.gapLess} ${classes.outerbox} `}>
         <Box className={classes.screen}>
@@ -150,9 +148,9 @@ function CardPreview({cardData, removeGap}) {
                     { cardData?.fields && <Grid container alignItems={"center"} justifyContent={"center"} spacing={2}>
                         {cardData.fields.map((field)=>(
                             <Grid item key={field._id} sm={2}>
-                                <Box sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer"}}>
+                                <Avatar sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer"}}>
                                     <img src={`https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${getFieldIcon(field.id)}`} width={32} height={32} alt={""}/>
-                                </Box>
+                                </Avatar>
                             </Grid>
                         ))}  
                     </Grid> }

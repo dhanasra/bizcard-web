@@ -65,7 +65,7 @@ function BizcardPage() {
   return (
     <>
     <SignInDrawer open={openLogin} onClose={()=>setOpenLogin(false)}/>
-    <ConnectContactDrawer open={openConnect} onClose={()=>setOpenConnect(false)}/>
+    <ConnectContactDrawer open={openConnect} onClose={()=>setOpenConnect(false)} cardData={cardData}/>
     <SaveContactDrawer 
       contact={cardData} 
       open={openSave} 
