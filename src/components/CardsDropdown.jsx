@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     return (
       <FormControl className={classes.formControl}>
         <Select
+          size="small"
           labelId="select-label"
           id="select"
           value={selectedValue}
