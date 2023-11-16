@@ -17,10 +17,14 @@ export const AppSlice = createSlice({
             state.cards = action.payload?.cards;
             window.cards = action.payload?.cards;
             window.config = action.payload?.config;
+        },
+        updateCards: (state, action)=>{
+            state.cards = action.payload?.cards;
+            window.cards = action.payload?.cards;
         }
     }
 })
 
-export const {initializeApp} = AppSlice.actions;
+export const {initializeApp, updateCards} = AppSlice.actions;
 
 export default AppSlice.reducer;

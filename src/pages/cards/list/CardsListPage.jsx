@@ -16,7 +16,7 @@ function CardsListPage() {
 
     const navigate = useNavigate();
 
-    const cards = useSelector((state)=>state.app.cards);
+    const cards = useSelector((state)=>state.app.cards)??[];
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -27,7 +27,7 @@ function CardsListPage() {
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
                 {
-                    cards.length===0
+                    cards?.length===0
                     ? <CardsEmpty/>
                     : <Box className={`${isSmallScreen ? classes.gapless: ''} ${classes.content}`}>
                         
@@ -53,7 +53,7 @@ function CardsListPage() {
                         <Box className={classes.cardsWrapper}>
                             <Grid container p={isSmallScreen ? 2: 3} spacing={2} >
                                 {
-                                    cards.map((card)=>(
+                                    cards?.map((card)=>(
                                         <Grid key={card._id} item xl={3} lg={4}  md={6}  xs={12}>
                                             <CardItem card={card}/>
                                         </Grid>

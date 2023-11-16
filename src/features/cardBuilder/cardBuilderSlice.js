@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+
 const initialState = {
     cardData: {}
 }
@@ -22,10 +23,14 @@ export const CardBuilderSlice = createSlice({
             }
 
             nestedObject[pathArray[pathArray.length - 1]] = value;
+        },
+
+        initializeCardData: (state, action)=>{
+            state.cardData = action.payload?.cardData;
         }
     }
 })
 
-export const {updateCardData} = CardBuilderSlice.actions;
+export const {updateCardData, initializeCardData} = CardBuilderSlice.actions;
 
 export default CardBuilderSlice.reducer;

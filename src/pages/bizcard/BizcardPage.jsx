@@ -9,6 +9,7 @@ import SaveContactDrawer from '../../components/SaveContactDrawer';
 import html2canvas from 'html2canvas';
 import { checkCookies } from '../../utils/utils';
 import SignInDrawer from '../../components/SignInDrawer';
+import { updateAnalytics, updateUniqueViewCount, updateViewCount } from '../../network/service/analyticsService';
 
 function BizcardPage() {
 
@@ -23,7 +24,11 @@ function BizcardPage() {
 
   useEffect(()=>{
     const init=async()=>{
-        const data = await getCardPreviewDetails(cardId);
+        const [data] = await Promise.all([
+          getCardPreviewDetails(cardId),
+          updateViewCount(cardId),
+          updateUniqueViewCount(cardId)
+        ]);
         setCardData(data);
         setLoading(false);
     }
@@ -50,6 +55,7 @@ function BizcardPage() {
     a.href = imgDataUrl;
     a.download = 'my-image.png';
     a.click();
+    await updateAnalytics(cardId, "share");
   }
 
   const download=async()=>{
@@ -60,6 +66,7 @@ function BizcardPage() {
     a.href = imgDataUrl;
     a.download = 'my-image.png';
     a.click();
+    await updateAnalytics(cardId, "save");
   }
 
   return (

@@ -1,14 +1,23 @@
-import { Box, Button, Divider, IconButton, Stack, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Button, Divider, IconButton, Snackbar, SnackbarContent, Stack, Typography } from '@mui/material'
+import React, { useState } from 'react'
 import QRCodeView from '../../../../components/QRCodeView'
 import { BiLogoFacebookCircle, BiLogoGmail, BiLogoInstagramAlt, BiLogoLinkedinSquare } from 'react-icons/bi';
 import { PiCopyLight } from 'react-icons/pi';
 import { useLocation } from 'react-router-dom';
+import { formCardLink } from '../../../../utils/utils';
 
 function ShareTabPanel() {
 
     const {state} = useLocation();
     const card = state.card;
+
+    const [showSnackBar, setShowSnackbar] = useState(false);
+
+    const copyLink = ()=>{
+        const cardLink = formCardLink(card._id);
+        navigator.clipboard.writeText(cardLink);
+        setShowSnackbar(true);
+    }
 
   return (
     <Box
@@ -20,10 +29,25 @@ function ShareTabPanel() {
             alignItems: "center"
         }}
     >
-
-        <QRCodeView cardId={card._id}/>
+        <Snackbar
+            open={showSnackBar}
+            autoHideDuration={1500}
+            onClose={()=>{setShowSnackbar(false)}}
+            severity="success"
+        >
+            <SnackbarContent
+                sx={{
+                    backgroundColor: "#139F20"
+                }}
+                message={"Card link copied successfully !"}
+            />
+        </Snackbar>
+        <div id="qrcode-container">
+            <QRCodeView cardId={card._id}/>
+        </div>
         <Typography variant="body2">Scan or Tap on the QR Code to preview.</Typography>
         <Button
+            onClick={copyLink}
             variant="contained"
             startIcon={<PiCopyLight/>}
             sx={{

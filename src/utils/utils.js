@@ -122,3 +122,8 @@ export function objectToTextReadableFormat(obj, depth = 0) {
   
     return result;
   }
+
+export function formCardLink(cardId){
+    const location = window.location.origin;
+    return `${location}/app/p/card/${cardId}`
+}

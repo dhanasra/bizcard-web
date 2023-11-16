@@ -34,7 +34,7 @@ function ContactsListPage() {
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
                 {
-                    cards.length===0
+                    cards?.length===0
                     ? <CardsEmpty/>
                     : <Box className={`${isSmallScreen ? classes.gapless: ''} ${classes.content}`}>
                         

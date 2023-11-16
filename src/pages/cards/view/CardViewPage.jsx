@@ -10,8 +10,14 @@ import ShareTabPanel from './panels/ShareTabPanel';
 import AnalyticsTabPanel from './panels/AnalyticsTabPanel';
 import SettingsTabPanel from './panels/SettingsTabPanel';
 import CardViewAppBar from '../../../components/CardViewAppBar';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CardPreview from '../../../components/CardPreview';
+import WindowLoader from '../../../components/WindowLoader';
+import { deleteCard } from '../../../network/service/cardService';
+import { useDispatch } from 'react-redux';
+import { updateCards } from '../../../features/app/appSlice';
+import html2canvas from 'html2canvas';
+import Cookies from 'js-cookie';
 
 function a11yProps(index) {
     return {
@@ -28,23 +34,63 @@ function CardViewPage() {
     const {state} = useLocation();
     const card = state.card;
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const [value, setValue] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
 
+    const handleDeleteCard = async()=>{
+        setLoading(true);
+        dispatch(updateCards([]));
+        await deleteCard(card._id);
+        setLoading(false);
+        navigate('/app/cards');
+    }
+
+    const downloadQRCode=async()=>{
+        const elementToCapture = document.getElementById('qrcode-container');
+        const canvas = await html2canvas(elementToCapture);
+        const imgDataUrl = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = imgDataUrl;
+        a.download = 'my-image.png';
+        a.click();
+    }
+
+    const downloadContact=async()=>{
+        const elementToCapture = document.getElementById('contact-container');
+        const canvas = await html2canvas(elementToCapture);
+        const imgDataUrl = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = imgDataUrl;
+        a.download = 'my-image.png';
+        a.click();
+    }
+
+    const handleCopy=async()=>{
+        Cookies.set('copy-card-id', card._id);
+        navigate('/app/cards/create');
+    }
+
   return (
     <Box className={classes.window}>
+        { loading && <WindowLoader/>}
         { isSmallScreen ? <CardViewAppBar/> : <CommonAppBar /> }
         <Box className={classes.outerBox}>
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
                 <Box className={`${isSmallScreen ? classes.gapless: ''} ${classes.content}`}>
                     <Box className={classes.previewBox}>
-                        <CardPreview cardData={card} removeGap={true}/>
+                        <div id="contact-container">
+                            <CardPreview cardData={card} removeGap={true}/>
+                        </div>
                     </Box>
 
                     {
@@ -61,10 +107,10 @@ function CardViewPage() {
                                     <Typography variant='h6'>Work</Typography>
                                 </Stack>
                                 <Stack direction={"row"} spacing={1} alignItems={"center"}>
-                                    <IconButton><PiCopyLight /></IconButton>
-                                    <IconButton><PiQrCodeLight /></IconButton>
-                                    <IconButton><PiFilePdfLight /></IconButton>
-                                    <IconButton><PiTrashLight /></IconButton>
+                                    <IconButton onClick={handleCopy}><PiCopyLight /></IconButton>
+                                    <IconButton onClick={downloadQRCode}><PiQrCodeLight /></IconButton>
+                                    <IconButton onClick={downloadContact}><PiFilePdfLight /></IconButton>
+                                    <IconButton onClick={handleDeleteCard}><PiTrashLight /></IconButton>
                                 </Stack>
                             </Box>
 

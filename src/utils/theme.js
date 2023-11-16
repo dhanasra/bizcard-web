@@ -73,6 +73,11 @@ const theme = createTheme({
         },
     },
     palette: {
+        customRed: createColor("#ff2052"),
+        customOrange: createColor("#ff5e20"),
+        customBlue: createColor("#2051ff"),
+        customViolet: createColor("#5f20ff"),
+
         bgGrey: createColor("#EEE7"),
         inverted: createColor("#3C4A78"),
         white: createColor("#fff"),

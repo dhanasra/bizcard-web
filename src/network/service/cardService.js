@@ -6,6 +6,10 @@ export async function getCardPreviewDetails(cardId){
     return await axiosClient.get(`/card-preview?cardId=${cardId}`);
 }
 
+export async function deleteCard(cardId){
+  return await axiosClient.delete(`/card?cardId=${cardId}`);
+}
+
 export async function saveBizcard(data){
 
     const formDataToSend = new FormData();

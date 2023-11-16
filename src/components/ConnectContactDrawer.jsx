@@ -7,6 +7,7 @@ import { HiCheckBadge, HiUser } from 'react-icons/hi2';
 import WindowLoader from './WindowLoader';
 import { createContact } from '../network/service/contactService';
 import { useNavigate } from 'react-router-dom';
+import { updateAnalytics } from '../network/service/analyticsService';
 
 function ConnectContactDrawer(props) {
 
@@ -29,7 +30,10 @@ function ConnectContactDrawer(props) {
             myCardId: selected?._id
         };
         
-        await createContact(dataToSend);
+        await Promise.all([
+            createContact(dataToSend),
+            updateAnalytics(props.cardData._id, "connect")
+        ])
         
         setLoading(false);
         navigate('/app/contacts');
