@@ -16,17 +16,17 @@ const items = [
     {
         icon: <PiUsersLight fontSize={'24px'}/>,
         label: "Contacts",
-        path: "/contacts"
+        path: "/app/contacts"
     },
     {
         icon: <PiImageSquareLight fontSize={'24px'}/>,
         label: "Theme",
-        path: "/backgrounds"
+        path: "/app/backgrounds"
     },
     {
         icon: <PiEnvelopeLight fontSize={'24px'}/>,
         label: "Signatures",
-        path: "/email-signatures"
+        path: "/app/email-signatures"
     },
     {
         icon: <PiGearLight fontSize={'24px'}/>,
