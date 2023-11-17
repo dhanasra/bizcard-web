@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme)=>{
         content: {
             display: "flex",
             flexDirection: "column",
-            width: "100%", 
+            width: "calc(100% - 500px)", 
             height: "calc(100% - 16px)",
             background: "#fff", 
-            margin: "16px 16px 0 16px", 
+            margin: "16px 0px 0 16px", 
             boxShadow: "0px 2px 30px #ccc6"
         },
         gapless: {
@@ -48,7 +48,21 @@ const useStyles = makeStyles((theme)=>{
                     boxShadow: "0px 2px 30px #ccc6"
                 },
             }
-        }
+        },
+        cardsWrapper: {
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "auto"
+        },
+        previewBox: {
+            width: "500px",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            padding: "16px"
+        },
     })
 });
 

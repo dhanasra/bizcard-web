@@ -1,10 +1,14 @@
 import { Box, Button, Divider, IconButton, Snackbar, SnackbarContent, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import QRCodeView from '../../../../components/QRCodeView'
-import { BiLogoFacebookCircle, BiLogoGmail, BiLogoInstagramAlt, BiLogoLinkedinSquare } from 'react-icons/bi';
 import { PiCopyLight } from 'react-icons/pi';
 import { useLocation } from 'react-router-dom';
 import { formCardLink } from '../../../../utils/utils';
+import { EmailShareButton, FacebookShareButton, LinkedinShareButton, WhatsappShareButton } from 'react-share';
+import EmailImg from '../../../../assets/social/email.png';
+import FacebookImg from '../../../../assets/social/facebook.png';
+import LinkedInImg from '../../../../assets/social/linkedin.png';
+import WhatsappImg from '../../../../assets/social/whatsapp.png';
 
 function ShareTabPanel() {
 
@@ -12,9 +16,9 @@ function ShareTabPanel() {
     const card = state.card;
 
     const [showSnackBar, setShowSnackbar] = useState(false);
+    const cardLink = formCardLink(card._id);
 
     const copyLink = ()=>{
-        const cardLink = formCardLink(card._id);
         navigator.clipboard.writeText(cardLink);
         setShowSnackbar(true);
     }
@@ -65,16 +69,24 @@ function ShareTabPanel() {
         
         <Stack direction={"row"}>
             <IconButton>
-                <BiLogoGmail fontSize={"32px"} color="#BB001B"/>
+                <EmailShareButton url={cardLink} quote={"Hello from bizcard!"}>
+                    <img src={EmailImg} width={32} height={32} alt={''}/>
+                </EmailShareButton>
             </IconButton>
             <IconButton>
-                <BiLogoFacebookCircle fontSize={"32px"} color="#4267B2"/>
+                <FacebookShareButton url={cardLink} quote={"Hello from bizcard!"}>
+                    <img src={FacebookImg} width={32} height={32} alt={''}/>
+                </FacebookShareButton>
             </IconButton>
             <IconButton>
-                <BiLogoInstagramAlt fontSize={"32px"} color="#F56040"/>
+                <WhatsappShareButton url={cardLink} quote={"Hello from bizcard!"}>
+                    <img src={WhatsappImg} width={32} height={32} alt={''}/>
+                </WhatsappShareButton>
             </IconButton>
             <IconButton>
-                <BiLogoLinkedinSquare fontSize={"32px"} color="#0077B5"/>
+                <LinkedinShareButton url={cardLink} quote={"Hello from bizcard!"}>
+                    <img src={LinkedInImg} width={32} height={32} alt={''}/>
+                </LinkedinShareButton>
             </IconButton>
 
         </Stack>
