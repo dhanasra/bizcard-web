@@ -74,8 +74,8 @@ function BizcardPage() {
     <>
 
     <Helmet>
-      <meta property="og:title" content="Your Web App Title" />
-      <meta property="og:description" content="Description of your web app" />
+      <meta property="og:title" content="Your Web App Title" data-react-helmet="true"/>
+      <meta property="og:description" content="Description of your web app" data-react-helmet="true"/>
     </Helmet>
 
     <SignInDrawer open={openLogin} onClose={()=>setOpenLogin(false)}/>
