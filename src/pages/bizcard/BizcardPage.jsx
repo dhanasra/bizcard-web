@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 import { checkCookies } from '../../utils/utils';
 import SignInDrawer from '../../components/SignInDrawer';
 import { updateAnalytics, updateUniqueViewCount, updateViewCount } from '../../network/service/analyticsService';
+import { Helmet } from 'react-helmet';
 
 function BizcardPage() {
 
@@ -71,6 +72,12 @@ function BizcardPage() {
 
   return (
     <>
+
+    <Helmet>
+      <meta property="og:title" content="Your Web App Title" />
+      <meta property="og:description" content="Description of your web app" />
+    </Helmet>
+
     <SignInDrawer open={openLogin} onClose={()=>setOpenLogin(false)}/>
     <ConnectContactDrawer open={openConnect} onClose={()=>setOpenConnect(false)} cardData={cardData}/>
     <SaveContactDrawer 
