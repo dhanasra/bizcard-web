@@ -3,7 +3,7 @@ import React from 'react'
 import CountUp from 'react-countup';
 import { PiEyeLight, PiHandshakeLight, PiHeartLight, PiPersonLight } from 'react-icons/pi';
 
-function AnalyticsTabPanel() {
+function AnalyticsTabPanel({data}) {
 
   // const data = [
   //   { label: 'A', value: 10 },
@@ -14,25 +14,25 @@ function AnalyticsTabPanel() {
   const analytics = [
     {
       name: "Views",
-      count: 100,
+      count: data?.viewCount??0,
       color: "#ff2052",
       icon: <PiEyeLight fontSize={"24px"} color="#ff2052"/>
     },
     {
       name: "Unique Visitors",
-      count: 100,
+      count: data?.uniqueVisitCount??0,
       color: "#ff5e20",
       icon: <PiPersonLight fontSize={"24px"} color="#ff5e20"/>
     },
     {
       name: "Saved",
-      count: 100,
+      count: data?.savedCount??0,
       color: "#2051ff",
       icon: <PiHeartLight fontSize={"24px"} color="#2051ff"/>
     },
     {
       name: "Connected",
-      count: 100,
+      count: data?.connectedCount??0,
       color: "#5f20ff",
       icon: <PiHandshakeLight fontSize={"24px"} color="#5f20ff"/>
     }

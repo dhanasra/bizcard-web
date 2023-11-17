@@ -129,7 +129,7 @@ function CardViewPage() {
                             
                             {
                                 value===0 ? <ShareTabPanel/> :
-                                value===1 ? <AnalyticsTabPanel/> 
+                                value===1 ? <AnalyticsTabPanel data={card.analytics.length>0 ? card.analytics[0] : null}/> 
                                 : <SettingsTabPanel cardId={card?._id} qrVisible={card?.qrVisible} logoInQr={card?.qrWithLogo} pause={card?.status!=="PAUSED"}/>
                             }
 
