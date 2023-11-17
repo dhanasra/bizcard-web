@@ -72,14 +72,15 @@ function BizcardPage() {
 
   return (
     <>
-
-    <Helmet>
-      <meta property="og:title" content="Your Web App Title" data-react-helmet="true"/>
-      <meta property="og:description" content="Description of your web app" data-react-helmet="true"/>
-      <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/constants%2Ferol-ahmed-IHL-Jbawvvo-unsplash.jpg?alt=media&token=b17ffa0f-11d9-48b3-a282-7788b05f80cce" />
-      <meta property="og:url" content="https://bizcard-web.web.app/" />
-      <meta property="og:type" content="website" />
-    </Helmet>
+    <parent>
+      <Helmet>
+        <meta property="og:title" content="Your Web App Title" data-react-helmet="true"/>
+        <meta property="og:description" content="Description of your web app" data-react-helmet="true"/>
+        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/constants%2Ferol-ahmed-IHL-Jbawvvo-unsplash.jpg?alt=media&token=b17ffa0f-11d9-48b3-a282-7788b05f80cce" />
+        <meta property="og:url" content="https://bizcard-web.web.app/" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+    </parent>
 
     <SignInDrawer open={openLogin} onClose={()=>setOpenLogin(false)}/>
     <ConnectContactDrawer open={openConnect} onClose={()=>setOpenConnect(false)} cardData={cardData}/>
