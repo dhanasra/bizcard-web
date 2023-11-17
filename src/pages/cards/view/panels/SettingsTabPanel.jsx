@@ -1,8 +1,33 @@
 import { Box, ListItem, ListItemIcon, ListItemText, Switch, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { PiEyeLight, PiPauseLight, PiQrCodeLight } from 'react-icons/pi'
+import { pauseCard, updateQrLogo, updateQrVisible } from '../../../../network/service/cardService';
 
-function SettingsTabPanel() {
+function SettingsTabPanel(props) {
+
+    const [qrVisible, setQrVisible] = useState(props.qrVisible??false);
+    const [logoInQr, setLogoInQr] = useState(props.logoInQr??false);
+    const [pause, setPause] = useState(props.pause??false);
+
+
+    const viewQrInCard=async(event)=>{
+        const status = event.target.checked;
+        setQrVisible(status);
+        await updateQrVisible(status, props.cardId);
+    }
+
+    const showLogoInQr=async(event)=>{
+        const status = event.target.checked;
+        setLogoInQr(status);
+        await updateQrLogo(status, props.cardId);
+    }
+
+    const disableCard=async(event)=>{
+        const status = event.target.checked;
+        setPause(status);
+        await pauseCard(status, props.cardId);
+    }
+
   return (
     <Box
         sx={{
@@ -25,7 +50,7 @@ function SettingsTabPanel() {
               </Box>
           </ListItemText> 
           <ListItemIcon sx={{minWidth: "36px", marginTop: "8px", marginRight: "8px"}}>
-              <Switch/>
+              <Switch onChange={viewQrInCard} checked={qrVisible}/>
           </ListItemIcon>
       </ListItem>
 
@@ -41,7 +66,7 @@ function SettingsTabPanel() {
               </Box>
           </ListItemText> 
           <ListItemIcon sx={{minWidth: "36px", marginTop: "8px", marginRight: "8px"}}>
-              <Switch/>
+              <Switch onChange={showLogoInQr} checked={logoInQr}/>
           </ListItemIcon>
       </ListItem>
 
@@ -57,7 +82,7 @@ function SettingsTabPanel() {
               </Box>
           </ListItemText> 
           <ListItemIcon sx={{minWidth: "36px", marginTop: "8px", marginRight: "8px"}}>
-              <Switch/>
+              <Switch onChange={disableCard} checked={pause}/>
           </ListItemIcon>
       </ListItem>
     

@@ -10,6 +10,18 @@ export async function deleteCard(cardId){
   return await axiosClient.delete(`/card?cardId=${cardId}`);
 }
 
+export async function updateQrVisible(status, cardId){
+  return await axiosClient.put(`/card?cardId=${cardId}`, {qrVisible: status});
+}
+
+export async function updateQrLogo(status, cardId){
+  return await axiosClient.put(`/card?cardId=${cardId}`, {qrWithLogo: status});
+}
+
+export async function pauseCard(isPaused, cardId){
+  return await axiosClient.put(`/card?cardId=${cardId}`, {status: isPaused ? "ACTIVE" : "PAUSED"});
+}
+
 export async function saveBizcard(data){
 
     const formDataToSend = new FormData();
