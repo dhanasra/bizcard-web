@@ -1,11 +1,10 @@
-import { Box, Button, Chip, Grid, Stack, Step, StepLabel, Stepper, Typography, useMediaQuery } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Chip, Grid, Stack, Typography, useMediaQuery } from '@mui/material'
+import React from 'react'
 import CommonAppBar from '../../components/CommonAppBar'
 import Sider from '../../components/Sider'
 import useStyles from './style';
 import theme from '../../utils/theme';
 import CardItemVert from '../../components/CardItemVert';
-import CardsDropdown from '../../components/CardsDropdown';
 
 function EmailSignaturesPage() {
 
@@ -17,7 +16,7 @@ function EmailSignaturesPage() {
 
     const templates = ["SQUARE", "QR CODE", "RECT", "LOGO", "TEXT"];
 
-    const [selected, setSelected] = useState(cards.length>0 ? cards[0] : null);
+    // const [selected, setSelected] = useState(cards.length>0 ? cards[0] : null);
 
   return (
     <Box className={classes.window}>
