@@ -73,6 +73,7 @@ function CreateCardPage() {
                             <Tab label="Display" {...a11yProps(2)} sx={{textTransform: "none"}} />
                             <Tab label="Fields" {...a11yProps(3)} sx={{textTransform: "none"}} />
                             <Tab label="Card" {...a11yProps(4)} sx={{textTransform: "none"}} />
+                            <Tab label="Qr Code" {...a11yProps(4)} sx={{textTransform: "none"}} />
                         </Tabs>
                     </Box>
                     <Box className={classes.scroll} p={3}>
@@ -94,7 +95,10 @@ function CreateCardPage() {
                 </Box>
                 
                 {!isSmallScreen && <Box className={classes.previewBox}>
-                    <CardPreview cardData={updated}/>
+                    
+                    {/* <div className={classes.previewContainer}> */}
+                        <CardPreview cardData={updated}/>
+                    {/* </div> */}
                 </Box>}
             </Box>
         </Box>

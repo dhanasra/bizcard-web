@@ -54,6 +54,9 @@ function GeneralForm() {
             <Grid item xs={12} md={6}>
                 <TextField label={"Email Address"} value={cardData?.email??""} onChange={(event)=>handleChange("email", event)} fullWidth/>
             </Grid>
+            <Grid item xs={12} >
+                <TextField label={"Bio"} value={cardData?.bio??""} onChange={(event)=>handleChange("bio", event)} fullWidth multiline rows={2}/>
+            </Grid>
         </Grid>
 
         <Box sx={{marginBottom: "12px", marginTop: "32px"}}>

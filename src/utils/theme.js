@@ -49,6 +49,20 @@ const theme = createTheme({
             fontFamily: 'sans-serif',
             fontWeight: 400
         },
+        paragraph: {
+            fontSize: '0.85em',
+            lineHeight: '1',
+            fontFamily: 'sans-serif',
+            fontWeight: 400,
+            whiteSpace: 'pre-line'
+        },
+        textFieldLabel: {
+            fontSize: '14px',
+            lineHeight: '2',
+            color: '#4F4F4F',
+            fontFamily: 'sans-serif',
+            fontWeight: 500
+        },
         subtitle: {
             fontSize: '1.2em',
             lineHeight: '2',

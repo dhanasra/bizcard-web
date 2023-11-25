@@ -43,7 +43,17 @@ const useStyles = makeStyles((theme)=>{
             width: "400px"
         },
         scroll: {
-            overflow: "auto"
+            overflow: "auto",
+            height: "100%"
+        },
+        previewContainer: {
+            backgroundColor: "#fff",
+            border: "1px solid rgb(189, 189, 189)",
+            borderRadius: "25px",
+            flexGrow: 1,
+            flexDirection: "column",
+            alignItems: "center",
+            boxSizing: "border-box"
         }
     })
 });

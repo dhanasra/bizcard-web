@@ -25,7 +25,6 @@ const useStyle = makeStyles({
           },
     },
     screen: {
-        background: "#fff",
         borderRadius: "4px",
         width: "100%",
         height: "100%",
@@ -40,6 +39,15 @@ const useStyle = makeStyles({
         background: "none",
         margin: "16px",
         padding: "0px"
+    },
+    previewContainer: {
+        minHeight: "100%",
+        height: "fit-content",
+        backgroundColor: "#fff",
+        border: "1px solid rgb(189, 189, 189)",
+        borderRadius: "25px 25px 0 0",
+        flexGrow: 1,
+        boxSizing: "border-box"
     }
 })
 
@@ -56,8 +64,9 @@ function CardPreview({cardData, removeGap}) {
 
   return (
     <Box className={`${ removeGap && classes.gapLess} ${classes.outerbox} `}>
+        <div className={classes.previewContainer}>
         <Box className={classes.screen}>
-            <Box className={classes.content} sx={{background: primaryColor}}>
+            <Box className={classes.content} >
                 { cardData?.picture && <div
                     style={{
                         position: "relative",
@@ -86,7 +95,7 @@ function CardPreview({cardData, removeGap}) {
                             backgroundImage: `url(${cardData.banner ?? cardData.picture})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
-                            borderRadius: "4px 4px 0 0",
+                            borderRadius: "25px",
                             position: "absolute", 
                         }}
                     />
@@ -96,13 +105,16 @@ function CardPreview({cardData, removeGap}) {
                     </Box> }
                 </div> }
                 
-                <Box px={2} sx={{background: background, paddingBottom: "32px"}}>
+                <Box px={2} sx={{background: background, paddingBottom: "32px", paddingTop: "16px", borderRadius: "32px"}}>
                     
                     <Box py={0}>
                         <Typography variant="titleBold">{cardData?.name?.prefix} {cardData?.name?.firstName} {cardData?.name?.middleName} {cardData?.name?.lastName}</Typography>
                         <Box>
                             <Typography variant="labelLight">{cardData?.company?.title}</Typography>
                         </Box>
+                    </Box>
+                    <Box py={'8px'}>
+                        <Typography variant="paragraph">{cardData?.bio}</Typography>
                     </Box>
 
                     <IconTextRow 
@@ -162,6 +174,7 @@ function CardPreview({cardData, removeGap}) {
             </Box>
 
         </Box>
+        </div>
     </Box>
   )
 }
