@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Grid, Typography } from '@mui/material'
+import { Avatar, Box, Divider, Grid, Stack, Typography } from '@mui/material'
 import { makeStyles } from "@mui/styles";
 import React from 'react'
 import { FiGlobe, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
@@ -159,10 +159,16 @@ function CardPreview({cardData, removeGap}) {
 
                     { cardData?.fields && <Grid container alignItems={"center"} justifyContent={"center"} spacing={2}>
                         {cardData.fields.map((field)=>(
-                            <Grid item key={field._id} sm={2}>
-                                <Avatar sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer"}}>
-                                    <img src={`https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${getFieldIcon(field.id)}`} width={32} height={32} alt={""}/>
-                                </Avatar>
+                            <Grid item key={field._id} sm={field.highlight ? 12 : 2}>
+                                <Box sx={{display: "flex", alignItems: "center"}}>
+                                    <Avatar sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", cursor: "pointer", margin: field.highlight ? "8px 16px": 0}}>
+                                        <img src={`https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/${getFieldIcon(field.id)}`} width={36} height={36} alt={""}/>
+                                    </Avatar>
+                                    { field.highlight && <Stack sx={{flexGrow: 1}}>
+                                        <Typography variant="label">{field.name}</Typography>
+                                        <Typography variant="paragraphLight">{field.desc}</Typography>
+                                    </Stack> }
+                                </Box>
                             </Grid>
                         ))}  
                     </Grid> }

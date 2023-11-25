@@ -55,6 +55,33 @@ function FieldsForm() {
     });
   }
 
+  const handleDescChange=(id, value)=>{
+    setFields(prevFields => {
+      const updated = prevFields.map(item => {
+        if (item.identifier === id) {
+          return { ...item, desc: value };
+        }
+        return item;
+      });
+      dispatch(updateCardData({ path: "fields", value: updated }));
+      return updated;
+    });
+  }
+
+  const handleHighlightChange=(id, value)=>{
+    setFields(prevFields => {
+      const updated = prevFields.map(item => {
+        if (item.identifier === id) {
+          return { ...item, highlight: value };
+        }
+        return item;
+      });
+      dispatch(updateCardData({ path: "fields", value: updated }));
+      return updated;
+    });
+  }
+
+
   const handleDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -100,6 +127,8 @@ function FieldsForm() {
                             onCancel={removeField}
                             onValueChange={handleValueChange}
                             onNameChange={handleNameChange}
+                            onDescChange={handleDescChange}
+                            onHighlightChange={handleHighlightChange}
                           />
                         </div>
                       )}

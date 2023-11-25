@@ -1,9 +1,9 @@
 import { Close } from '@mui/icons-material'
-import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
+import { Box, IconButton, InputAdornment, Switch, TextField, Typography } from '@mui/material'
 import React from 'react'
-import { FiInfo, FiMenu } from 'react-icons/fi'
+import { FiEdit, FiInfo, FiMenu } from 'react-icons/fi'
 
-function FieldItem({field, onCancel, onValueChange, onNameChange}) {
+function FieldItem({field, onCancel, onValueChange, onNameChange, onDescChange, onHighlightChange}) {
 
   return (
     <Box
@@ -49,6 +49,26 @@ function FieldItem({field, onCancel, onValueChange, onNameChange}) {
                 ),
             }}
             fullWidth/>
+            
+            { field.highlight && <TextField 
+            label={"Link Description"} 
+            sx={{marginTop: "16px"}}
+            value={field.desc??""} 
+            onChange={(event)=>onDescChange(field.identifier, event.target.value)}
+            InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                    <Box sx={{padding: "2px 3px", display: "flex"}}>
+                        <FiEdit size={"18px"}/>
+                    </Box>
+                    </InputAdornment>
+                ),
+            }}
+            fullWidth/> }
+            <Box sx={{display: "flex", alignItems: "center", marginTop: "8px", justifyContent: "end"}}>
+                <Typography variant="highlight">Highlight</Typography>
+                <Switch checked={field.highlight} onChange={()=>onHighlightChange(field.identifier, !field.highlight)}/>
+            </Box>
     </Box>
   )
 }

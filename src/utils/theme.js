@@ -56,6 +56,14 @@ const theme = createTheme({
             fontWeight: 400,
             whiteSpace: 'pre-line'
         },
+        paragraphLight: {
+            fontSize: '0.85em',
+            lineHeight: '1',
+            color: '#666',
+            fontFamily: 'sans-serif',
+            fontWeight: 400,
+            whiteSpace: 'pre-line'
+        },
         textFieldLabel: {
             fontSize: '14px',
             lineHeight: '2',
@@ -79,6 +87,11 @@ const theme = createTheme({
         },
         h5: {
             fontWeight: 600,
+        },
+        highlight: {
+            color: "#4F4F4F",
+            fontSize: "13px",
+            fontWeight: 600
         },
         titleBold: {
             fontSize: '1.1em',
