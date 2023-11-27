@@ -36,11 +36,11 @@ export function generateRandomId() {
 }
 
 export const anyNotEmpty = (obj) => {
-    if (Object.keys(obj).length === 0) {
-      return false;
+    if (obj == null || Object.keys(obj).length === 0) {
+        return false;
     }
-  
-    return Object.values(obj).some(([key, value]) => value && value !== "");
+
+    return Object.values(obj).some(value => value && value !== "");
 };
 
 export const getFieldIcon = (fieldId) => {

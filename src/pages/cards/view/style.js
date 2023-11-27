@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme)=>{
             margin: "0px"
         },
         previewBox: {
-            width: "400px"
+            width: "400px",
         },
         toolbar: {
             display: "flex", 

@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    cardData: {}
+    cardData: {
+        cardName: 'Business Card'
+    }
 }
 
 export const CardBuilderSlice = createSlice({

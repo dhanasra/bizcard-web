@@ -32,6 +32,8 @@ function CardViewPage() {
     const classes = useStyles();
 
     const {state} = useLocation();
+
+    console.log(state);
     const card = state.card;
 
     const dispatch = useDispatch();
@@ -88,7 +90,7 @@ function CardViewPage() {
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
                 <Box className={`${isSmallScreen ? classes.gapless: ''} ${classes.content}`}>
                     <Box className={classes.previewBox}>
-                        <div id="contact-container">
+                        <div id="contact-container" style={{height: "100%"}}>
                             <CardPreview cardData={card} removeGap={true}/>
                         </div>
                     </Box>
