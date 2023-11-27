@@ -47,7 +47,7 @@ function ShareTabPanel() {
             />
         </Snackbar>
         <div id="qrcode-container">
-            <QRCodeView cardId={card._id}/>
+            <QRCodeView cardId={card._id} />
         </div>
         <Typography variant="body2">Scan or Tap on the QR Code to preview.</Typography>
         <Button

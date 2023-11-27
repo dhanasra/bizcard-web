@@ -1,9 +1,10 @@
-import { Box, IconButton, Stack, Typography } from '@mui/material'
+import { Box, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import ImageCropper from './ImageCropper'
 import { FiX } from 'react-icons/fi';
+import { InfoOutlined } from '@mui/icons-material';
 
-function ImagePickerPlaceholder({text, picture, width, height, onChange, onRemove}) {
+function ImagePickerPlaceholder({text, picture, width, height, onChange, onRemove, title, instruction, icon}) {
 
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState(null);
@@ -45,6 +46,19 @@ function ImagePickerPlaceholder({text, picture, width, height, onChange, onRemov
 
   return (
     <Stack sx={{width: "100%"}}>
+        <Box sx={{
+            width: width ?? "132px",
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "10px"
+        }}>
+            <Stack direction={"row"} spacing={1}>
+                <Typography variant="body3">{title}</Typography>
+                {instruction && <Tooltip title={instruction} placement="top" arrow>
+                    <InfoOutlined fontSize='10px' sx={{color: '#666'}}/>
+                </Tooltip>}
+            </Stack>
+        </Box>
         <input
             type="file"
             accept="image/*"
@@ -80,7 +94,10 @@ function ImagePickerPlaceholder({text, picture, width, height, onChange, onRemov
                     {
                     croppedImage 
                         ? <img src={croppedImage} width={"100%"} height={"100%"} style={{borderRadius: "8px", cursor: "pointer"}} alt="Preview" />
-                        : <Typography variant='body3'>{text ?? "Upload Picture"}</Typography>
+                        : <Stack sx={{display: "flex"}} alignItems={"center"} spacing={2}>
+                            {icon}
+                            <Typography variant='body3'>{text ?? "Upload Picture"}</Typography>
+                        </Stack>
                     }
                     </Box>
                 </label>

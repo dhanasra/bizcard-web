@@ -3,6 +3,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardData } from '../../../../features/cardBuilder/cardBuilderSlice';
 import ImagePickerPlaceholder from '../../../../components/ImagePickerPlaceholder';
+import { FaUserCircle } from 'react-icons/fa';
 
 function GeneralForm() {
 
@@ -30,9 +31,12 @@ function GeneralForm() {
             <Grid item xs={12}>
                 <Box>
                     <ImagePickerPlaceholder
+                        title={"Profile Picture"}
+                        instruction={"Ideal dimensions: 540px x 540px (1:1)"}
                         picture={cardData?.picture}
                         onChange={handleImageChange}
                         onRemove={removeImage}
+                        icon={<FaUserCircle fontSize={"40px"} style={{color: "#aaa"}}/>}
                     />
                 </Box>
             </Grid>

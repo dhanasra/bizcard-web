@@ -14,6 +14,8 @@ import WindowLoader from '../../../components/WindowLoader';
 import { useNavigate } from 'react-router-dom';
 import { saveBizcard } from '../../../network/service/cardService';
 import { useSelector } from 'react-redux';
+import QRCodeForm from './forms/QRCodeForm';
+import QrCodePreview from '../../../components/QrCodePreview';
 
 function a11yProps(index) {
     return {
@@ -72,8 +74,8 @@ function CreateCardPage() {
                             <Tab label="Business" {...a11yProps(1)} sx={{textTransform: "none"}} />
                             <Tab label="Display" {...a11yProps(2)} sx={{textTransform: "none"}} />
                             <Tab label="Fields" {...a11yProps(3)} sx={{textTransform: "none"}} />
-                            <Tab label="Card" {...a11yProps(4)} sx={{textTransform: "none"}} />
                             <Tab label="Qr Code" {...a11yProps(4)} sx={{textTransform: "none"}} />
+                            <Tab label="Card" {...a11yProps(4)} sx={{textTransform: "none"}} />
                         </Tabs>
                     </Box>
                     <Box className={classes.scroll} p={3}>
@@ -81,7 +83,8 @@ function CreateCardPage() {
                             value===0 ? <GeneralForm/> : 
                             value===1 ? <BusinessForm/> : 
                             value===2 ? <DisplayForm/> : 
-                            value===3 ? <FieldsForm/> : <CardForm/>
+                            value===3 ? <FieldsForm/> : 
+                            value===4 ? <QRCodeForm/> :<CardForm/>
                         }
                     </Box>
                     <Stack direction={"row-reverse"} spacing={2} sx={{background: "#fff", boxShadow: "0px 2px 30px #ccc6", display: "flex",p: 2}}>
@@ -97,7 +100,13 @@ function CreateCardPage() {
                 {!isSmallScreen && <Box className={classes.previewBox}>
                     
                     {/* <div className={classes.previewContainer}> */}
-                        <CardPreview cardData={updated}/>
+
+                    {
+                        value===4
+                            ? <QrCodePreview cardData={updated}/>
+                            : <CardPreview cardData={updated}/>
+                    }
+                        
                     {/* </div> */}
                 </Box>}
             </Box>

@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid } from '@mui/material'
+import { Box, Grid, Stack } from '@mui/material'
 import React, { useState } from 'react'
 import { HiCheckBadge } from "react-icons/hi2";
 import { useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ function DesignPicker({design}) {
 
 
   return (
-    <Grid container spacing={4}>
+    <Stack spacing={{ xs: 1, sm: 4 }} direction="row" useFlexGap flexWrap="wrap">
         {
             designs.map((design)=>(
                 <Grid key={design.id} item xs={6} sm={6} md={3}>
@@ -30,7 +30,7 @@ function DesignPicker({design}) {
                             height: "150px",
                             background: "#fff",
                             position: "relative",
-                            boxShadow: "0px 2px 30px #ccc6",
+                            outline: `2px solid ${selected.name===design.name ? '#7680A0' : '#ccc6'}`,
                             borderRadius: "8px"
                         }}>
                             { selected.name===design.name && <HiCheckBadge 
@@ -53,26 +53,13 @@ function DesignPicker({design}) {
                                 sx={{
                                     width: "100%",
                                     height: "90px",
-                                    background: "#7FFFD4",
+                                    background: "#d3d3d3",
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center',
                                     borderRadius: "8px",
                                     position: "absolute", 
                                 }}
                             />
-
-                            <Avatar sx={{
-                                zIndex: 100,
-                                background: "#7FFFD4", 
-                                position: "absolute", 
-                                width: 46,
-                                height: 46,
-                                right: 16,
-                                top: 40
-                            }}/>
-
-                            
-
                             { design.id!=="d-4" && <Box sx={{width: "100%",  marginBottom: "-4px", position: "absolute", bottom: 0}}>
                                 <img src={design.wave} alt="Wave SVG" style={{background: "#00000000"}}/>
                             </Box>}
@@ -83,7 +70,7 @@ function DesignPicker({design}) {
                 </Grid>
             ))
         }          
-    </Grid>
+    </Stack>
   )
 }
 

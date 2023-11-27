@@ -4,6 +4,7 @@ import RichTextEditor from '../../../../components/RichTextEditor';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardData } from '../../../../features/cardBuilder/cardBuilderSlice';
 import ImagePickerPlaceholder from '../../../../components/ImagePickerPlaceholder';
+import { FaAd, FaImage } from 'react-icons/fa';
 
 function BusinessForm() {
 
@@ -43,9 +44,12 @@ function BusinessForm() {
                 <Box sx={{display: "flex"}}>
                     <ImagePickerPlaceholder
                         text={"Upload Logo"}
+                        instruction={"Ideal dimensions: 440px x 440px (1:1)"}
+                        title={"Company Logo"}
                         picture={cardData?.logo}
                         onChange={handleImageChange}
                         onRemove={removeLogo}
+                        icon={<FaImage fontSize={"40px"} style={{color: "#aaa"}}/>}
                     />
                 </Box>
             </Grid>
@@ -53,10 +57,13 @@ function BusinessForm() {
                 <Box sx={{display: "flex", width: "100%"}}>
                     <ImagePickerPlaceholder
                         width={"auto"}
+                        instruction={"Ideal dimensions: 780px x 300px (2.6:1)"}
                         text={"Upload Banner"}
+                        title={"Banner"}
                         picture={cardData?.banner}
                         onChange={handleBannerChange}
                         onRemove={removeBanner}
+                        icon={<FaAd fontSize={"40px"} style={{color: "#aaa"}}/>}
                     />
                 </Box>
             </Grid>
