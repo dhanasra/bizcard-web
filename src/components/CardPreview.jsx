@@ -6,6 +6,7 @@ import IconTextRow from './IconTextRow';
 import Header from './Header';
 import HtmlViewer from './HtmlViewer';
 import { anyNotEmpty, designs, getDesign, getFieldIcon } from '../utils/utils';
+import { CARD_IMAGE_PATH } from '../utils/global';
 
 const useStyle = makeStyles({
     outerbox: {
@@ -76,7 +77,7 @@ function CardPreview({cardData, removeGap}) {
 
                     {
                         cardData?.picture && cardData?.banner && <Avatar
-                            src={cardData?.picture}
+                            src={`${CARD_IMAGE_PATH}${cardData._id}%2Fprofile.jpg?alt=media`}
                             sx={{
                                 width: 84, 
                                 height: 84,
@@ -92,7 +93,7 @@ function CardPreview({cardData, removeGap}) {
                             width: "100%",
                             height: "100%",
                             background: primaryColor,
-                            backgroundImage: `url(${cardData.banner ?? cardData.picture})`,
+                            backgroundImage: `url(${CARD_IMAGE_PATH}${cardData._id}%2Fbanner.jpg?alt=media)`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             borderRadius: "25px",
@@ -141,6 +142,7 @@ function CardPreview({cardData, removeGap}) {
                         visible={cardData?.company?.companyName || cardData?.company?.department}
                         text={cardData?.company?.companyName}
                         logo={cardData?.logo}
+                        id={cardData._id}
                         subtext={cardData?.company?.department}
                     />
 

@@ -3,6 +3,8 @@ import Wave from "../assets/svgs/wave.svg"
 import Wave1 from "../assets/svgs/wave_1.svg"
 import Wave2 from "../assets/svgs/wave_2.svg"
 import Wave3 from "../assets/svgs/wave_3.svg"
+import { ref, uploadBytes } from 'firebase/storage';
+import { storage } from "../config/firebase";
 
 export function checkCookies(){
     const accessToken = Cookies.get('accessToken');
@@ -73,6 +75,16 @@ export const designs = [
 export function getDesign(name) {
     return designs.find(design=>design.name===name);
 }
+
+export async function uploadImage(folderName, fileName, objectData) {
+    console.log(objectData);
+    const blob = handleBase64Image(objectData);
+    const storageRef = ref(storage, `${folderName}/${fileName}`);
+    await uploadBytes(storageRef, blob);
+}
+
+
+
 export const handleBase64Image = (base64String) => {
     // Remove the "data:image/jpeg;base64," prefix
     const base64WithoutPrefix = base64String.replace(/^data:image\/[a-z]+;base64,/, '');

@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import React from 'react'
 import logo from '../assets/logo/logo.png'
 import { useNavigate } from 'react-router-dom';
+import { CARD_IMAGE_PATH } from '../utils/global';
 
 const useStyles = makeStyles((theme) => ({
     image: {
@@ -65,16 +66,17 @@ function CardItem({card}) {
                 }}
             >
                 { (card.picture || card.logo || card.banner) &&
-                <img 
-                    alt=""
-                    height="100%"
-                    style={{
-                        position: "relative",
-                        borderRadius: "0 6px 6px 0"
-                    }}
-                    className={classes.image}
-                    src={card.picture || card.logo || card.banner}
-                />}
+                    <img 
+                        alt=""
+                        height="100%"
+                        style={{
+                            position: "relative",
+                            borderRadius: "0 6px 6px 0"
+                        }}
+                        className={classes.image}
+                        src={`${CARD_IMAGE_PATH}${card._id}%2F${card.picture? 'profile': card.logo ? 'logo': 'banner'}.jpg?alt=media`}
+                    />
+                }
                 <Box
                     sx={{   
                         left: "-10px",

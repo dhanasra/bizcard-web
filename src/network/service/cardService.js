@@ -1,6 +1,5 @@
-import { handleBase64Image } from "../../utils/utils";
+import { uploadImage } from "../../utils/utils";
 import axiosClient from "../axiosClient";
-
 
 export async function getCardPreviewDetails(cardId){
     return await axiosClient.get(`/card-preview?cardId=${cardId}`);
@@ -47,20 +46,24 @@ export async function saveBizcard(data){
     recursivelyAppendToFormData(data);
 
     if (data.logo) {
-        const logoBlob = handleBase64Image(data.logo);
-        formDataToSend.append('logo', logoBlob, 'logo.jpg');
+      formDataToSend.append('logo', true);
     }
 
     if (data.picture) {
-        const pictureBlob = handleBase64Image(data.picture);
-        formDataToSend.append('picture', pictureBlob, 'picture.jpg');
+      formDataToSend.append('picture', true);
     }
 
     if (data.banner) {
-        const bannerBlob = handleBase64Image(data.banner);
-        formDataToSend.append('banner', bannerBlob, 'banner.jpg');
+      formDataToSend.append('banner', true);
     }
 
+    const result = await axiosClient.post('/card', formDataToSend);
 
-    return await axiosClient.post('/card', formDataToSend);
+    await Promise.all([
+      data.logo && uploadImage(`card/${result._id}`, 'logo.jpg', data.logo),
+      data.picture && uploadImage(`card/${result._id}`, 'profile.jpg', data.picture),
+      data.banner && uploadImage(`card/${result._id}`, 'banner.jpg', data.banner),
+    ]);
+
+    return result;
 }
