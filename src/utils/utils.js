@@ -77,7 +77,6 @@ export function getDesign(name) {
 }
 
 export async function uploadImage(folderName, fileName, objectData) {
-    console.log(objectData);
     const blob = handleBase64Image(objectData);
     const storageRef = ref(storage, `${folderName}/${fileName}`);
     await uploadBytes(storageRef, blob);
@@ -138,4 +137,17 @@ export function objectToTextReadableFormat(obj, depth = 0) {
 export function formCardLink(cardId){
     const location = window.location.origin;
     return `${location}/app/p/card/${cardId}`
+}
+
+export function formatDate(dateString){
+
+    const dateObject = new Date(dateString);
+
+    const formattedDate = dateObject.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+
+    return formattedDate;
 }

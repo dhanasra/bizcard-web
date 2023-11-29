@@ -33,7 +33,6 @@ function CardViewPage() {
 
     const {state} = useLocation();
 
-    console.log(state);
     const card = state.card;
 
     const dispatch = useDispatch();

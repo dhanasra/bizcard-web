@@ -5,7 +5,6 @@ import { CARD_IMAGE_PATH } from '../utils/global';
 
 function Header({visible, logo, id, text, subtext}) {
 
-  console.log(`${CARD_IMAGE_PATH}${id}%2Flogo.jpg?alt=media`);
   return (
     visible && <ListItem sx={{px: 0, py: "4px", alignItems: "flex-start"}}>
         <ListItemIcon sx={{minWidth: "32px", marginTop: "8px", marginRight: "8px"}}>
