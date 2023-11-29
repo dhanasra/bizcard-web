@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Grid, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Button, Divider, Grid, Stack, Typography } from '@mui/material'
 import { makeStyles } from "@mui/styles";
 import React from 'react'
 import { FiGlobe, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
@@ -7,6 +7,7 @@ import Header from './Header';
 import HtmlViewer from './HtmlViewer';
 import { anyNotEmpty, designs, getDesign, getFieldIcon } from '../utils/utils';
 import { CARD_IMAGE_PATH } from '../utils/global';
+import { useNavigate } from 'react-router-dom';
 
 const useStyle = makeStyles({
     outerbox: {
@@ -33,6 +34,7 @@ const useStyle = makeStyles({
     content: {
         width: "auto",
         display: "flex",
+        paddingBottom: "110px",
         flexDirection: "column",
         borderRadius: "4px",
     },
@@ -52,7 +54,13 @@ const useStyle = makeStyles({
     }
 })
 
-function CardPreview({cardData, removeGap}) {
+function CardPreview({cardData, removeGap, showCreateProfile}) {
+
+    const navigate = useNavigate();
+
+    const handleNavigate = ()=>{
+        navigate('/signup');
+    }
 
     const classes = useStyle();
 
@@ -142,7 +150,7 @@ function CardPreview({cardData, removeGap}) {
                         visible={cardData?.company?.companyName || cardData?.company?.department}
                         text={cardData?.company?.companyName}
                         logo={cardData?.logo}
-                        id={cardData._id}
+                        id={cardData?._id}
                         subtext={cardData?.company?.department}
                     />
 
@@ -176,6 +184,12 @@ function CardPreview({cardData, removeGap}) {
                     </Grid> }
 
                 </Box>
+
+                {showCreateProfile && <Stack alignItems={"center"} sx={{marginTop: "12px"}}>
+                    <Typography variant="labelLight" sx={{color: "#FF8C00", fontWeight: 600}}> Want to create your Digital card? </Typography>
+                    <Button variant="outlined" sx={{boxShadow: 4, width: "320px", padding: "8px", my: 2}} onClick={handleNavigate}>Create Your Own Profile</Button>
+                    <Typography variant="labelLight" > Join Bizcard Now ! </Typography>
+                </Stack>}
                 
 
 

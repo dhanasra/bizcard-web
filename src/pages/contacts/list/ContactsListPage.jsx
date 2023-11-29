@@ -19,7 +19,7 @@ function ContactsListPage() {
     const [viewContact, setViewContact] = useState(false);
     const [selectedContact, setSelectedContact] = useState(null);
 
-    const cards = useSelector((state)=>state.app.cards);
+    const contacts = useSelector((state)=>state.app.contacts);
 
     const handleTap = (card)=>{
         setSelectedContact(card);
@@ -34,7 +34,7 @@ function ContactsListPage() {
             <Sider/>
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
                 {
-                    cards?.length===0
+                    contacts?.length===0
                     ? <CardsEmpty/>
                     : <Box className={`${isSmallScreen ? classes.gapless: ''} ${classes.content}`}>
                         
@@ -55,10 +55,10 @@ function ContactsListPage() {
                         </Box>
                         <Box className={classes.cardsWrapper}>
                             {
-                                cards.map((card)=>(
-                                    <Grid key={card._id} container p={isSmallScreen ? 2: 3} spacing={2} >
+                                contacts.map((contact)=>(
+                                    <Grid key={contact?.card._id} container p={isSmallScreen ? 2: 3} spacing={2} >
                                         <Grid item xl={1.5} lg={2}  md={3} sm={4}  xs={6}>
-                                            <ContactItem cardData={card} onTap={()=>handleTap(card)}/>
+                                            <ContactItem cardData={contact?.card} onTap={()=>handleTap(contact?.card)}/>
                                         </Grid>
                                     </Grid>
                                 ))

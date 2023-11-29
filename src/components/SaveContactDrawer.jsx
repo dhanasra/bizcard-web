@@ -1,10 +1,11 @@
-import { Button, Divider, Drawer, IconButton, Snackbar, SnackbarContent, Stack, TextField, Toolbar, Typography, useMediaQuery } from '@mui/material'
+import { Button, CircularProgress, Divider, Drawer, IconButton, Snackbar, SnackbarContent, Stack, TextField, Toolbar, Typography, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import { PiCopyLight, PiDownloadLight, PiHeartLight } from 'react-icons/pi'
 import theme from '../utils/theme';
-import { objectToTextReadableFormat } from '../utils/utils';
 import html2pdf from 'html2pdf.js';
+import { anyNotEmpty, formCardLink } from '../utils/utils';
+import { sendContactToMail } from '../network/service/cardService';
 
 function SaveContactDrawer(props) {
 
@@ -13,13 +14,46 @@ function SaveContactDrawer(props) {
     const width = window.innerWidth;
 
     const [email, setEmail] = useState('');
-    const handleEmailChange =(event)=>setEmail(event.target.value);
+    const handleEmailChange =(event)=>{
+        const emailValue = event.target.value;
+        setEmail(emailValue);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailRegex.test(emailValue);
+
+        setIsValidEmail(isValid);
+    };
+
+    const [buttonLoading, setButtonLoading] = useState(false);
 
     const [showSnackBar, setShowSnackbar] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [isValidEmail, setIsValidEmail] = useState(false);
 
     const copyInfo = ()=>{
-        const contactInfo = objectToTextReadableFormat(props.contact)
+        const contact = props.contact;
+        const contactInfo = `
+            Profile Details :
+
+            ${contact?.name?.firstName??""} ${contact?.name?.middleName??""} ${contact?.name?.lastName??""},
+            ${contact?.address?.addressLine1??""} ${contact?.address?.addressLine2??""} ${contact?.address?.city??""} ${contact?.address?.state??""} ${contact?.address?.country??""} ${contact?.address?.pincode??""}
+            ${contact?.email??""}
+            ${contact?.phoneNumber??""}
+
+            ------------------------------
+
+            ${ anyNotEmpty(contact?.company??{}) ? 'Company Details :' :'' }
+
+            ${contact?.company?.companyName??""}
+            ${contact?.company?.companyWebsite??""}
+
+            ------------------------------
+
+            Connect me at :
+
+            ${formCardLink(contact._id)}
+        `
         navigator.clipboard.writeText(contactInfo);
+        setToastMessage("Contact copied successfully !");
         setShowSnackbar(true);
     }
 
@@ -40,8 +74,17 @@ function SaveContactDrawer(props) {
             .save();
     };
 
-    const shareCard = () => {
-        props.onShare();
+    const shareCard = async() => {
+        if (!isValidEmail) {
+            setIsValidEmail(false);
+            return;
+        }
+        setButtonLoading(true);
+        await sendContactToMail(email, props.contact._id);
+        setEmail('');
+        setButtonLoading(false);
+        setToastMessage("Contact details send to your email address successfully !");
+        setShowSnackbar(true);
     }
 
 
@@ -57,7 +100,7 @@ function SaveContactDrawer(props) {
                 sx={{
                     backgroundColor: "#139F20"
                 }}
-                message={"Contact copied successfully !"}
+                message={toastMessage}
             />
         </Snackbar>
         <Drawer
@@ -86,9 +129,24 @@ function SaveContactDrawer(props) {
             <Stack px={3} py={5} spacing={4}>
 
 
-                <TextField label={"Your Email Address"} onChange={handleEmailChange} value={email} fullWidth/>
+                <TextField label={"Your Email Address"} onChange={handleEmailChange} value={email} error={!isValidEmail} helperText={!isValidEmail ? 'Please enter a valid email address' : ''} fullWidth/>
                 
-                <Button  variant="contained" onClick={shareCard} disableElevation fullWidth>Receive Via Email</Button>
+                <Button  variant="contained" onClick={shareCard} sx={{ position: 'relative', height: 40 }} disableElevation fullWidth>
+                {
+                    buttonLoading 
+                    ? <CircularProgress
+                    size={24}
+                    style={{
+                        color: 'white',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        marginTop: '-12px', 
+                        marginLeft: '-12px',
+                    }}/> 
+                    : 'Receive Via Email'
+                    
+                }</Button>
 
                 <Divider>
                     <Typography variant="body2" >Or</Typography>

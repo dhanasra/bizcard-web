@@ -1,6 +1,5 @@
 import { Drawer, IconButton, Snackbar, SnackbarContent, Typography, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
-import { objectToTextReadableFormat } from '../utils/utils';
 import theme from '../utils/theme';
 import { Toolbar } from 'mui-rte';
 import { FiX } from 'react-icons/fi';
@@ -8,12 +7,6 @@ import { FiX } from 'react-icons/fi';
 function ShareCardDrawer(props) {
 
     const [showSnackBar, setShowSnackbar] = useState(false);
-
-    const copyInfo = ()=>{
-        const contactInfo = objectToTextReadableFormat('')
-        navigator.clipboard.writeText(contactInfo);
-        setShowSnackbar(true);
-    }
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 

@@ -1,4 +1,4 @@
-import { Box, Fab, Skeleton, Typography } from '@mui/material';
+import { Box, Fab, Skeleton, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import CardPreview from '../../components/CardPreview';
@@ -10,7 +10,8 @@ import html2canvas from 'html2canvas';
 import { checkCookies } from '../../utils/utils';
 import SignInDrawer from '../../components/SignInDrawer';
 import { updateAnalytics, updateUniqueViewCount, updateViewCount } from '../../network/service/analyticsService';
-import { Helmet } from 'react-helmet';
+
+let count = 0;
 
 function BizcardPage() {
 
@@ -22,19 +23,35 @@ function BizcardPage() {
   const [openLogin, setOpenLogin] = useState(false);
   const [openConnect, setOpenConnect] = useState(false);
   const [openSave, setOpenSave] = useState(false);
+  
+  const isAlreadyConnected = window.contacts && (window.contacts?.some((contact)=>contact.card._id===cardId)); 
+  const [isConnected, setIsConnected] = useState(isAlreadyConnected);
+
+  const isLoggedIn = checkCookies();
+  const isOwnCard = window.cards && (window.cards?.some((item)=>item._id===cardId));  
 
   useEffect(()=>{
-    const init=async()=>{
+    const init = async () => {
+      try {
+        setLoading(true);
+
         const [data] = await Promise.all([
           getCardPreviewDetails(cardId),
-          updateViewCount(cardId),
-          updateUniqueViewCount(cardId)
+          (count===0) && updateViewCount(cardId),
+          (count===0) && updateUniqueViewCount(cardId),
         ]);
+        count++;
         setCardData(data);
+        
+      } catch (error) {
+        console.log(error);
+      } finally {
         setLoading(false);
-    }
+      }
+    };
+  
     init();
-  })
+  }, [cardId])
 
   const handleConnectClick=()=>{
 
@@ -70,20 +87,16 @@ function BizcardPage() {
     await updateAnalytics(cardId, "save");
   }
 
+  const handleConnected = ()=>{
+    setIsConnected(true);
+    setOpenConnect(false);
+  }
+
   return (
-    <>
-    <parent>
-      <Helmet>
-        <meta property="og:title" content="Your Web App Title"/>
-        <meta property="og:description" content="Description of your web app"/>
-        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/bizcard-web.appspot.com/o/constants%2Ferol-ahmed-IHL-Jbawvvo-unsplash.jpg?alt=media&token=b17ffa0f-11d9-48b3-a282-7788b05f80cce" />
-        <meta property="og:url" content="https://bizcard-web.web.app/" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-    </parent>
+    <div >
 
     <SignInDrawer open={openLogin} onClose={()=>setOpenLogin(false)}/>
-    <ConnectContactDrawer open={openConnect} onClose={()=>setOpenConnect(false)} cardData={cardData}/>
+    <ConnectContactDrawer open={openConnect} onClose={()=>setOpenConnect(false)} onConnected={handleConnected} cardData={cardData}/>
     <SaveContactDrawer 
       contact={cardData} 
       open={openSave} 
@@ -91,28 +104,30 @@ function BizcardPage() {
       onDownload={()=>download()}
       onShare={(email)=>shareToMail(email)}/>
     <Box sx={{display: "flex", justifyContent: "center", position: "relative", height: "100vh"}}>
-        {!loading && <div style={{position: "fixed", bottom: 16, display: "flex", zIndex: 1000}}>
-            <Fab variant="extended" color="primary" sx={{width: "150px"}} onClick={()=>handleConnectClick()}>
+        {!loading && <Stack direction={"row"} sx={{position: "fixed", bottom: 16, display: "flex", zIndex: 1000}} spacing={3}>
+            
+            { (isLoggedIn && !isOwnCard && !isConnected) && <Fab variant="extended" color="primary" sx={{width: "150px"}} onClick={()=>handleConnectClick()}>
               <PiHandshakeLight style={{marginRight: "16px", fontSize: "24px"}}/>
               <Typography variant="body2">CONNECT</Typography>
-            </Fab>
-            <div style={{width: "40px"}}/>
+            </Fab>}
+            
             <Fab variant="extended" color="primary" sx={{width: "150px"}} onClick={()=>setOpenSave(true)}>
               <PiHeart style={{marginRight: "16px", fontSize: "24px"}}/>
               <Typography variant="body2">SAVE</Typography>
             </Fab>
-          </div>}
+
+          </Stack>}
         {
             loading
                 ? <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
-                : <Box sx={{maxWidth: "460px"}}>
-                    <div id={"contact-preview-container"}>
-                    <CardPreview cardData={cardData} removeGap={true} />
+                : <Box sx={{maxWidth: "420px", }}>
+                    <div id={"contact-preview-container"} style={{height: "calc(100% - 16px)"}}>
+                    <CardPreview cardData={cardData} removeGap={true} showCreateProfile={!isLoggedIn} />
                     </div>
                 </Box>
         }
     </Box>
-    </>
+    </div>
   )
 }
 

@@ -90,7 +90,7 @@ function CardViewPage() {
             <Box component="main" className={`${classes.contentBox} ${isSmallScreen ? classes.gapless: ''}`}>
                 <Box className={`${isSmallScreen ? classes.gapless: ''} ${classes.content}`}>
                     <Box className={classes.previewBox}>
-                        <div id="contact-container" style={{height: "100%"}}>
+                        <div id="contact-container" style={{height: "calc(100% - 16px)"}}>
                             <CardPreview cardData={card} removeGap={true}/>
                         </div>
                     </Box>

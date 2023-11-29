@@ -16,6 +16,7 @@ export const AppSlice = createSlice({
             state.contacts = action.payload?.contacts;
             state.cards = action.payload?.cards;
             window.cards = action.payload?.cards;
+            window.contacts = action.payload?.contacts;
             window.config = action.payload?.config;
         },
         updateCards: (state, action)=>{

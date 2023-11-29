@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosClient = axios.create({
-    baseURL: `https://l7xmn78vt8.execute-api.ap-south-1.amazonaws.com/dev`,
+    baseURL: `https://6vlmkwbze7.execute-api.ap-south-1.amazonaws.com/dev`,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

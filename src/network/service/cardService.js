@@ -67,3 +67,7 @@ export async function saveBizcard(data){
 
     return result;
 }
+
+export async function sendContactToMail(to, cardId){
+    return await axiosClient.post('/receive-contact', {to, cardId});
+}

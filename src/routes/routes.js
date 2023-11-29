@@ -114,9 +114,7 @@ const router = [
     {
         path: '/app/p/card/:cardId',
         element: (
-          <Provider store={RootStore}>
-            <BizcardPage />
-          </Provider>
+            <BizcardPage /> 
         )
     },
     {
